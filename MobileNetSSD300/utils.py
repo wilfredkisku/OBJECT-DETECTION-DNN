@@ -5,6 +5,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 
+import xml.etree.ElementTree as ET
+
+
+def read_content(xml_file: str):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+
+    list_with_all_boxes = []
+
+    for boxes in root.iter('object'):
+        
+        print(boxes)
+
+        filename = root.find('filename').text
+
+        ymin, xmin, ymax, xmax = None, None, None, None
+
+        ymin = int(boxes.find("bndbox/ymin").text)
+        xmin = int(boxes.find("bndbox/xmin").text)
+        ymax = int(boxes.find("bndbox/ymax").text)
+        xmax = int(boxes.find("bndbox/xmax").text)
+
+        list_with_single_boxes = [xmin, ymin, xmax, ymax]
+        print(list_with_single_boxes)
+        list_with_all_boxes.append(list_with_single_boxes)
+
+    return filename, list_with_all_boxes
 
 def drawImages():
     DATA_PATH = '/home/wilfred/dataset/StanfordDogDataset/archive/'
@@ -33,7 +60,9 @@ def drawImages():
     #draw.rectangle(xy=[(xmin,ymin), (xmax,ymax)])
 
 if __name__ == '__main__':
-
-    drawImages()
-
-
+    DATA_PATH = '/home/wilfred/dataset/StanfordDogDataset/archive/'
+    path = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000027.xml'
+    #drawImages()
+    #name, boxes = read_content(DATA_PATH+'annotations/Annotation/n02113799-standard_poodle/n02113799_489')
+    name, boxes = read_content(path)
+    print(name, boxes)
