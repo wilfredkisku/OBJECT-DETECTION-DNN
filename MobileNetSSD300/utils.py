@@ -7,19 +7,29 @@ import cv2
 
 import xml.etree.ElementTree as ET
 
+def readCOCO(xml_file: str):
 
-def read_content(xml_file: str):
+    return None
+
+def readVOC(xml_file: str):
+    """
+    Extracts the bounding box information from the xml file.
+
+    Arguments:
+        xml_path: ``str`` path to the xml file, particularly curated for object detection
+    
+    Returns:
+        filename: ``str`` filename associated to the particular xml file and the image
+        list_of_boxes: ``list`` of bounding boxes and the object associated to the bounding box
+    """
     tree = ET.parse(xml_file)
     root = tree.getroot()
-
     list_with_all_boxes = []
+    list_with_all_objectnames = []
 
     for boxes in root.iter('object'):
         
-        print(boxes)
-
         filename = root.find('filename').text
-
         ymin, xmin, ymax, xmax = None, None, None, None
 
         ymin = int(boxes.find("bndbox/ymin").text)
@@ -28,14 +38,14 @@ def read_content(xml_file: str):
         xmax = int(boxes.find("bndbox/xmax").text)
 
         list_with_single_boxes = [xmin, ymin, xmax, ymax]
-        print(list_with_single_boxes)
+        list_with_all_objectnames.append(boxes.find("name").text)
         list_with_all_boxes.append(list_with_single_boxes)
 
-    return filename, list_with_all_boxes
+    return filename, [list_with_all_objectnames,list_with_all_boxes]
 
 def drawImages():
-    DATA_PATH = '/home/wilfred/dataset/StanfordDogDataset/archive/'
 
+    DATA_PATH = '/home/wilfred/dataset/StanfordDogDataset/archive/'
     with open(DATA_PATH+'annotations/Annotation/n02113799-standard_poodle/n02113799_489') as f:
         reader = f.read()
 
@@ -60,9 +70,6 @@ def drawImages():
     #draw.rectangle(xy=[(xmin,ymin), (xmax,ymax)])
 
 if __name__ == '__main__':
-    DATA_PATH = '/home/wilfred/dataset/StanfordDogDataset/archive/'
-    path = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000027.xml'
-    #drawImages()
-    #name, boxes = read_content(DATA_PATH+'annotations/Annotation/n02113799-standard_poodle/n02113799_489')
-    name, boxes = read_content(path)
-    print(name, boxes)
+    path = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000042.xml'
+    name, bndbxinfo = readVOC(path) 
+    print(name, bndbxinfo)
