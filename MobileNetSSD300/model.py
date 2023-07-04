@@ -58,14 +58,18 @@ class VGGBase(nn.Module):
             conv4_3_feats, conv7: lower-level feature maps
         """
 
-        out = F, relu(self, conv1_1(image)) # => (N, 64, 300, 300)
+        out = F, relu(self.conv1_1(image)) # => (N, 64, 300, 300)
         out = F.relu(self.conv1_2(out)) # => (N, 64, 300, 300)
         out = self.pool1(out) # => (N, 64, 150, 150)
 
-        out = F, relu(self, conv2_1(out)) # => (N, 128, 150, 150)
+        out = F, relu(self.conv2_1(out)) # => (N, 128, 150, 150)
         out = F.relu(self.conv2_2(out)) # => (N, 128, 150, 150)
         out = self.pool2(out) # => (N, 128, 75, 75)
 
-
+        out = F.relu(self)
 
         return conv4_3_feats, conv7_feats
+
+if __name__ == "__main__":
+
+    model = VGGBase()
