@@ -1,14 +1,27 @@
 from PIL import Image, ImageDraw
 
 import re
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 
 import xml.etree.ElementTree as ET
 
-def readCOCO(xml_file: str):
-
+def readCOCO(json_path: str):
+    f = open(json_path)
+    anns = json.load(f)
+    print(anns.keys())
+    #print(anns['categories'])
+    #print(len(anns['images']))
+    #print(anns['images'][118286])
+    #print(len(anns['images']))
+    #print(anns['annotations'])
+    count = 0
+    for i in anns['annotations']:
+        if i['image_id'] == 143:
+            count += 1 
+    print(count)
     return None
 
 def readVOC(xml_file: str):
@@ -70,6 +83,8 @@ def drawImages():
     #draw.rectangle(xy=[(xmin,ymin), (xmax,ymax)])
 
 if __name__ == '__main__':
-    path = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000042.xml'
-    name, bndbxinfo = readVOC(path) 
-    print(name, bndbxinfo)
+    path_xml = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000042.xml'
+    path_json = '/home/wilfred/dataset/COCO/archive/coco2017/annotations/instances_train2017.json'
+    #name, bndbxinfo = readVOC(path_xml) 
+    #print(name, bndbxinfo)
+    readCOCO(path_json)
