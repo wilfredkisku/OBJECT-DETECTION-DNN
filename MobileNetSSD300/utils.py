@@ -84,7 +84,7 @@ def drawImages():
 
 if __name__ == '__main__':
     path_xml = '/home/wilfred/dataset/PASCAL-VOC/archive/VOC2012_train_val/VOC2012_train_val/Annotations/2007_000042.xml'
-    path_json = '/home/wilfred/dataset/COCO/archive/coco2017/annotations/instances_train2017.json'
+    path_json = '/home/wilfred/Datasets/COCO/annotations_trainval2017/annotations/instances_train2017.json'
     #name, bndbxinfo = readVOC(path_xml) 
     #print(name, bndbxinfo)
     readCOCO(path_json)
