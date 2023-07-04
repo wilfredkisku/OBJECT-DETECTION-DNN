@@ -112,6 +112,13 @@ class VGGBase(nn.Module):
         # Transfer conv parameters from pretrained model to current model
         for i, param in enumerate(param_names[:-4]): # excluding conv6 and conv7 parameters
             state_dict[param] = pretrained_state_dict[pretrained_param_names[i]]
+        
+        conv_fc6_weight = pretrained_state_dict['classifier.0.weight'].view(4096, 512, 7, 7)
+        conv_fc6_bias = pretrained_state_dict['classifier.0.bias']
+
+        state_dict['conv6.weight'] = decimate(conv_fc6_weight, m=[4, None, 3, 3])
+        state_dict['conv6.bias'] = decimate(conv_fc6_bias, m=[4])
+
 
 if __name__ == "__main__":
 
