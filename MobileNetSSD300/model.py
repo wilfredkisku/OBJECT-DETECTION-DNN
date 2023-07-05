@@ -98,6 +98,7 @@ class VGGBase(nn.Module):
 
         #state dictionary of the current model
         state_dict = self.state_dict()
+        #print(state_dict['conv7.weight'].shape)
         #names of the paramaters
         param_names = list(state_dict.keys())
 
@@ -118,6 +119,17 @@ class VGGBase(nn.Module):
 
         state_dict['conv6.weight'] = decimate(conv_fc6_weight, m=[4, None, 3, 3])
         state_dict['conv6.bias'] = decimate(conv_fc6_bias, m=[4])
+    
+        conv_fc7_weight = pretrained_state_dict['classifier.3.weight'].view(4096, 4096, 1, 1)
+        conv_fc7_bias = pretrained_state_dict['classifier.3.bias']
+
+        state_dict['conv7.weight'] = decimate(conv_fc7_weight, m=[4, 4, None, None])
+        state_dict['conv7.bias'] = decimate(conv_fc7_bias, m=[4])
+
+        self.load_state_dict(state_dict)
+        #print(state_dict['conv7.weight'].shape)
+        print('Loaded base model ...')
+
 
 
 if __name__ == "__main__":
