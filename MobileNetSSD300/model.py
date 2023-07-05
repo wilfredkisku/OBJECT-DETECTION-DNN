@@ -270,8 +270,43 @@ class PredictionConvolutions(nn.Module):
         
         return locs, classes_scores
 
+class SSD300(nn.Module):
+
+    def __init__(self, n_classes):
+
+        super(SSD300, self).__init__()
+        
+        self.n_classes = n_classes
+
+        self.base = VGGBase()
+        self.aux_convs = AuxiliaryConvolutions()
+        self.pred_convs = PredictionConvolutions(n_classes)
+
+        self.rescale_factors = nn.Parameter(torch.FloatTensor(1, 512, 1, 1))
+        nn.init.constant_(self.rescale_factors, 20)
+
+        self.priors_cxcy = self.create_prior_boxes()
+        
+    def forward(self, image):
+
+        conv4_3_feats, conv7_feats = self.base(image)
+
+        norm = conv4_3_feats.pow(2).sum(dim=1, keepdim=True).sqrt()
+        conv4_3_feats = conv4_3_feats / norm
+        conv4_3_feats = conv4_3_feats * self.rescale_factors
+        
+        conv8_2_feats, conv9_2_feats, conv10_2_feats, conv11_2_feats = self.aux_convs(conv7_feats)
+
+        locs, classes_scores = self.pred_convs(conv4_3_feats, conv7_feats, conv8_2_feats, conv9_2_feats, conv10_2_feats, conv11_2_feats)
+
+        return locs, classes_scores
+
+    def create_prior_boxes(self):
+        return None
+
 if __name__ == "__main__":
 
     #model = VGGBase()
     #model = AuxiliaryConvolutions()
-    model = PredictionConvolutions(10)
+    #model = PredictionConvolutions(10)
+    model = SSD300(10)
