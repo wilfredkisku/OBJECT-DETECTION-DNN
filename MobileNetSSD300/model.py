@@ -240,6 +240,36 @@ class PredictionConvolutions(nn.Module):
         l_conv11_2 = l_conv11_2.permute(0, 2, 3, 1).contiguous()
         l_conv11_2 = l_conv11_2.view(batch_size, -1, 4)
 
+        #predict classes
+        c_conv4_3 = self.cl_conv4_3(conv4_3_feats)
+        c_conv4_3 = c_conv4_3.permute(0, 2, 3, 1).contiguous()
+        c_conv4_3 = c_conv4_3.view(batch_size, -1, self.n_classes)
+
+        c_conv7 = self.cl_conv7(conv7_feats)
+        c_conv7 = c_conv7.permute(0, 2, 3, 1).contiguous()
+        c_conv7 = c_conv7.view(batch_size, -1, self.n_classes)
+
+        c_conv8_2 = self.cl_conv8_2(conv8_2_feats)
+        c_conv8_2 = c_conv8_2.permute(0, 2, 3, 1).contiguous()
+        c_conv8_2 = c_conv8_2.view(batch_size, -1, self.n_classes)
+
+        c_conv9_2 = self.cl_conv9_2(conv9_2_feats)
+        c_conv9_2 = c_conv9_2.permute(0, 2, 3, 1).contiguous()
+        c_conv9_2 = c_conv9_2.view(batch_size, -1, self.n_classes)
+
+        c_conv10_2 = self.cl_conv10_2(conv10_2_feats)
+        c_conv10_2 = c_conv10_2.permute(0, 2, 3, 1).contiguous()
+        c_conv10_2 = c_conv10_2.view(batch_size, -1, self.n_classes)
+
+        c_conv11_2 = self.cl_conv11_2(conv11_2_feats)
+        c_conv11_2 = c_conv11_2.permute(0, 2, 3, 1).contiguous()
+        c_conv11_2 = c_conv11_2.view(batch_size, -1, self.n_classes)
+
+        locs = torch.cat([l_conv4_3, l_conv7, l_conv8_2, l_conv9_2, l_conv10_2, l_conv11_2], dim=1)
+        classes_scores = torch.cat([c_conv4_3, c_conv7, c_conv8_2, c_conv9_2, c_conv10_2, c_conv11_2], dim=1)
+        
+        return locs, classes_scores
+
 if __name__ == "__main__":
 
     #model = VGGBase()
