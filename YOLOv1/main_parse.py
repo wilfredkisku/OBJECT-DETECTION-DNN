@@ -1,27 +1,38 @@
 import os
 import pandas as pd
 
-images = os.listdir('images/')
-labels = os.listdir('labels/')
+def create(lines):
+    clean = []
+    for l in lines:
+        lin = l.split()
+        if int(lin[0]) == 14:
+            lin[0] = str(0)
+            #print(l)
+            clean.append(' '.join([elem for elem in lin]))
+    return clean
 
-csv_df = pd.read_csv(r'train.csv')
+def parse(path):
+    label_files = os.listdir(path)
+    for lab_file in label_files:
+        with open('labels/'+lab_file) as f:
+            lines = f.readlines()
+            clean = create(lines)
+            count = len(clean)
+            for c in clean:
+                count -= 1
+                print(c)
+                if count != 0:
+                    str_ = c+'\n'
+                else:
+                    str_ = c
 
-images.sort()
-labels.sort()
+                with open('labels_persons/'+lab_file, 'a+') as ff:
+                    ff.write(str_)
+                ff.close()
+    print("completed...")
+    return None
 
-print(len(images))
-print(len(labels))
-print(len(csv_df))
-
-img_new = [img[:-4] for img in images]
-lab_new = [lab[:-4] for lab in labels]
-
-not_in_img = [img for img in img_new if img not in lab_new]
-not_in_lab = [lab for lab in lab_new if lab not in img_new]
-
-print(len(not_in_img))
-print(len(not_in_lab))
-
+'''
 for files in labels:
     with open('labels/'+files) as f:
         lines = f.readlines()
@@ -34,5 +45,7 @@ for files in labels:
                 with open('labels_persons/'+files, 'a+') as ff:
                     ff.write(lin)
                 ff.close()
+'''
+if __name__ == "__main__":
 
-    print('*****')
+    parse('labels/')
