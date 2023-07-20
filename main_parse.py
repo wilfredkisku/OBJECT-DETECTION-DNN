@@ -1,6 +1,11 @@
 import os
 import pandas as pd
 
+labels_classes = ['background','aeroplane','bicycle','bird','boat','bottle','bus','car','cat','chair','cow','diningtable','dog','horse','motorbike','person','potted','plant','sheep','sofa','train','tvmonitor'] 
+
+#def split(df, train_pre):
+#    return df[:int(len(df)*train_per)], df[int(len(df)*train_per):]
+
 def create(lines):
     clean = []
     for l in lines:
@@ -30,7 +35,7 @@ def parse(path):
                     ff.write(str_)
                 ff.close()
     print("completed...")
-    return None
+    return 
 
 '''
 for files in labels:
