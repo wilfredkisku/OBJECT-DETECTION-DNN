@@ -1,3 +1,8 @@
+"""
+Main file for training Yolo model on Pascal VOC dataset
+
+"""
+
 import torch
 import torchvision.transforms as transforms
 import torch.optim as optim
@@ -7,34 +12,33 @@ from torch.utils.data import DataLoader
 from model import Yolov1
 from dataset import VOCDataset
 from utils import (
-        intersection_over_union,
-        non_max_suppression,
-        mean_average_precision,
-        cellboxes_to_boxes,
-        get_bboxes,
-        plot_image,
-        save_checkpoint,
-        load_checkpoint,
-        )
-
+    non_max_suppression,
+    mean_average_precision,
+    intersection_over_union,
+    cellboxes_to_boxes,
+    get_bboxes,
+    plot_image,
+    save_checkpoint,
+    load_checkpoint,
+)
 from loss import YoloLoss
-
 
 seed = 123
 torch.manual_seed(seed)
 
-#Hyperparameters
+# Hyperparameters etc. 
 LEARNING_RATE = 2e-5
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-BATCH_SIZE = 16
+BATCH_SIZE = 16 # 64 in original paper but I don't have that much vram, grad accum?
 WEIGHT_DECAY = 0
-EPOCHS = 100
-NUM_WORKERS = 2
-PIN_MEMORY = True
+EPOCHS = 500
+NUM_WORKERS = 0
+PIN_MEMORY = False
 LOAD_MODEL = False
-LOAD_MODEL_FILE = "overfit.pth.tar"
-IMG_DIR = "/home/wilfred/dataset/PACAL-VOC-DATA/archive/images"
-LABEL_DIR = "/home/wilfred/dataset/PACAL-VOC-DATA/archive/labels"
+LOAD_MODEL_FILE = "my_checkpoint_320.pth.tar"
+IMG_DIR = "/workspace/data/PASCAL-VOC/archive/images"
+LABEL_DIR = "/workspace/data/PASCAL-VOC/archive/labels"
+
 
 class Compose(object):
     def __init__(self, transforms):
@@ -46,9 +50,11 @@ class Compose(object):
 
         return img, bboxes
 
-transform = Compose([transforms.Resize((448, 448)), transforms.ToTensor()])
 
-def train_fn(train_loader,mode, optimizer, loss_fn):
+transform = Compose([transforms.Grayscale(),transforms.Resize((320, 320)), transforms.ToTensor(),])
+
+
+def train_fn(train_loader, model, optimizer, loss_fn):
     loop = tqdm(train_loader, leave=True)
     mean_loss = []
 
@@ -56,42 +62,39 @@ def train_fn(train_loader,mode, optimizer, loss_fn):
         x, y = x.to(DEVICE), y.to(DEVICE)
         out = model(x)
         loss = loss_fn(out, y)
-        print(loss.item())
-
-        import sys
-        sys.exit()
         mean_loss.append(loss.item())
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-        #update the progress bar
+        # update progress bar
         loop.set_postfix(loss=loss.item())
 
     print(f"Mean loss was {sum(mean_loss)/len(mean_loss)}")
 
+
 def main():
-    model = Yolov1(split_size=7, num_boxes=2, num_classes=20).to(DEVICE)
+    #print(torch.cuda.is_available())
+    #print(DEVICE)
+    model = Yolov1(split_size=5, num_boxes=2, num_classes=20).to(DEVICE)
     optimizer = optim.Adam(
-                model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY
-            )
+        model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY
+    )
     loss_fn = YoloLoss()
 
     if LOAD_MODEL:
         load_checkpoint(torch.load(LOAD_MODEL_FILE), model, optimizer)
 
     train_dataset = VOCDataset(
-            "/home/wilfred/dataset/PACAL-VOC-DATA/archive/8examples.csv",
-            transform=transform,
-            img_dir=IMG_DIR,
-            label_dir=LABEL_DIR
-            )
+        "/workspace/data/PASCAL-VOC/archive/train.csv",
+        transform=transform,
+        img_dir=IMG_DIR,
+        label_dir=LABEL_DIR,
+    )
+
     test_dataset = VOCDataset(
-            "/home/wilfred/dataset/PACAL-VOC-DATA/archive/test.csv",
-            transform=transform,
-            img_dir=IMG_DIR,
-            label_dir=LABEL_DIR
-            )
+        "/workspace/data/PASCAL-VOC/archive/test.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR,
+    )
 
     train_loader = DataLoader(
         dataset=train_dataset,
