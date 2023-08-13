@@ -7,9 +7,9 @@ from itertools import product as product
 
 import torchvision
 import torch.nn.functional as F
+from torchsummary import summary
 
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#print(device)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class VGGBase(nn.Module):
     """
@@ -51,8 +51,15 @@ class VGGBase(nn.Module):
         self.conv6 = nn.Conv2d(512, 1024, kernel_size=3, padding=6, dilation=6) #atrous convolution
         self.conv7 = nn.Conv2d(1024, 1024, kernel_size=1)
 
+        self.init_conv2d()
+        
+    def init_conv2d(self):
+        for c in self.children():
+            if isinstance(c, nn.Conv2d):
+                nn.init.xavier_uniform_(c.weight)
+                nn.init.constant_(c.bias, 0.)
         #Load the pretrained layers of VGG16 onto the newly created state dictionary (Imagenet)
-        self.load_pretrained_layers()
+        #self.load_pretrained_layers()
 
     def forward(self, image):
         """
@@ -93,42 +100,6 @@ class VGGBase(nn.Module):
         conv7_feats = F.relu(self.conv7(out)) # => (N, 1024, 19, 19)
 
         return conv4_3_feats, conv7_feats
-
-    def load_pretrained_layers(self):
-
-        #state dictionary of the current model
-        state_dict = self.state_dict()
-        #print(state_dict['conv7.weight'].shape)
-        #names of the paramaters
-        param_names = list(state_dict.keys())
-
-        #pretrained VGG base
-        pretrained_state_dict = torchvision.models.vgg16(pretrained=True).state_dict()
-        pretrained_param_names = list(pretrained_state_dict.keys())
-
-        #print(state_dict)
-        #print(param_names)
-        #print(param_names[:-4])
-
-        # Transfer conv parameters from pretrained model to current model
-        for i, param in enumerate(param_names[:-4]): # excluding conv6 and conv7 parameters
-            state_dict[param] = pretrained_state_dict[pretrained_param_names[i]]
-        
-        conv_fc6_weight = pretrained_state_dict['classifier.0.weight'].view(4096, 512, 7, 7)
-        conv_fc6_bias = pretrained_state_dict['classifier.0.bias']
-
-        state_dict['conv6.weight'] = decimate(conv_fc6_weight, m=[4, None, 3, 3])
-        state_dict['conv6.bias'] = decimate(conv_fc6_bias, m=[4])
-    
-        conv_fc7_weight = pretrained_state_dict['classifier.3.weight'].view(4096, 4096, 1, 1)
-        conv_fc7_bias = pretrained_state_dict['classifier.3.bias']
-
-        state_dict['conv7.weight'] = decimate(conv_fc7_weight, m=[4, 4, None, None])
-        state_dict['conv7.bias'] = decimate(conv_fc7_bias, m=[4])
-
-        self.load_state_dict(state_dict)
-        #print(state_dict['conv7.weight'].shape)
-        print('Loaded base model ...')
 
 class AuxiliaryConvolutions(nn.Module):
     def __init__(self):
@@ -301,12 +272,10 @@ class SSD300(nn.Module):
 
         return locs, classes_scores
 
-    def create_prior_boxes(self):
-        return None
-
+    
 if __name__ == "__main__":
 
     #model = VGGBase()
-    #model = AuxiliaryConvolutions()
+    model = AuxiliaryConvolutions()
     #model = PredictionConvolutions(10)
-    model = SSD300(10)
+    #model = SSD300(10)
