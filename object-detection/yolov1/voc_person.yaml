@@ -1,0 +1,19 @@
+PATH: /home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive
+
+TRAIN: 
+ - images
+
+TRAIN_LABEL:
+ - labels
+
+TRAIN_LABEL_PERSONS:
+ - labels_persons_new
+
+VAL: 
+ - test_images
+
+VAL_FILE: voc-person-val.json
+
+CLASS_INFO: {
+  0: 'person'
+}
