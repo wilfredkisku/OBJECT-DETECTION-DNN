@@ -23,6 +23,7 @@ from utils import generate_random_color
 from evaluate import Evaluator
 
 #constants
+device = 'cpu'
 image_size = input_size = 128
 batch_size = 64
 num_epochs = 150
@@ -36,36 +37,36 @@ nms_thres = 0.6
 workers = 1
 SEED = 42
 
-def train(args, dataloader, model, criterion, optimizer):
+weight_dir = os.path.join(os.getcwd(), "training")
+
+def train(dataloader, model, criterion, optimizer):
+    #loss types 
     loss_type = ["multipart", "obj", "noobj", "box", "cls"]
     losses = defaultdict(float)
     
     #to train
     model.train()
+
     #make gradients zero
     optimizer.zero_grad()
 
     #load minibatch 
     for i, minibatch in enumerate(dataloader):
-        ni = i + len(dataloader) * (epoch - 1)
-        if ni <= args.nw:
-            args.grad_accumulate = max(1, np.interp(ni, [0, args.nw], [1, args.nominal_batch_size / args.batch_size]).round())
-            set_lr(optimizer, args.base_lr * pow(ni / (args.nw), 4))
-
+        
+        #set_lr(optimizer, args.base_lr * pow(ni / (args.nw), 4))
         images, labels = minibatch[1], minibatch[2]
+        
+        #predictions + loss calculation
+        predictions = model(images).to(device)
+        loss = criterion(predictions=predictions, labels=labels)
 
-        with amp.autocast(enabled=not args.no_amp):
-            predictions = model(images.cuda(args.rank, non_blocking=True))
-            loss = criterion(predictions=predictions, labels=labels)
-        scaler.scale((loss[0] / args.grad_accumulate) * args.world_size).backward()
-
-        if ni - args.last_opt_step >= args.grad_accumulate:
-            scaler.step(optimizer)
-            scaler.update()
-            optimizer.zero_grad()
-            if ema is not None:
-                ema.update(model)
-            args.last_opt_step = ni
+        #if ni - args.last_opt_step >= args.grad_accumulate:
+        #    scaler.step(optimizer)
+        #    scaler.update()
+        #    optimizer.zero_grad()
+        #    if ema is not None:
+        #        ema.update(model)
+        #    args.last_opt_step = ni
 
         for loss_name, loss_value in zip(loss_type, loss):
             if not torch.isfinite(loss_value) and loss_name != "multipart":
@@ -75,18 +76,18 @@ def train(args, dataloader, model, criterion, optimizer):
                 losses[loss_name] += loss_value.item()
 
     del images, predictions
-    torch.cuda.empty_cache()
+    #torch.cuda.empty_cache()
 
     loss_str = f"[Train-Epoch:{epoch:03d}] "
+    
     for loss_name in loss_type:
         losses[loss_name] /= len(dataloader)
         loss_str += f"{loss_name}: {losses[loss_name]:.4f}  "
     return loss_str
 
-
 def main_task(yaml_path, logger):
     
-    device = 'cpu'
+    #device = 'cpu'
     random.seed(SEED)
     torch.manual_seed(SEED)
 
@@ -106,25 +107,52 @@ def main_task(yaml_path, logger):
     color_list = generate_random_color(len(class_list))
     mAP_filepath = val_dataset.mAP_filepath
 
-    print(class_list, color_list, mAP_filepath)
+    #print(class_list, color_list, mAP_filepath)
 
     model = YoloModel(input_size=input_size, num_classes=1, pretrained=True).to(device)
     #macs, params = profile(deepcopy(model))
     criterion = YoloLoss(grid_size=model.grid_size, label_smoothing=label_smoothing)
     optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=momentum, weight_decay=weight_decay)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=lr_decay, gamma=0.1)
+    
+    #evaluate from the eval data split
     evaluator = Evaluator(annotation_file=mAP_filepath)
-    #print(macs, params)
-    '''
+    
     start_epoch = 1
-    progress_bar = trange(start_epoch, num_epochs+1, total=num_epochs, intital=start_epoch, ncols=115)
-    best_epoch, best_score, best_mAP_str, mAP_dict = 0, 0, "", None
 
-    for epoch in progress_bar:
+    #progress_bar = trange(start_epoch, num_epochs+1, total=num_epochs, intital=start_epoch, ncols=115)
+    progress_bar = range(start_epoch, num_epochs+1)
+    best_epoch, best_score, best_mAP_str, mAP_dict = 0, 0, "", None
+    
+    for epoch in progress_bar:   
+        #train_loader = tqdm(train_loader, desc=f"[TRAIN:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
+        train_loss_str = train(dataloader=train_loader, model=model, criterion=criterion, optimizer=optimizer)
+        # clean the train code ------>
         
-        train_loader = tqdm(train_loader, desc=f"[TRAIN:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
-        train_loss_str = train(args=args, dataloader=train_loader, model=model, criterion=criterion, optimizer=optimizer)
-    '''
+        logging.warning(train_loss_str)
+        save_opt = {"running_epoch": epoch,
+                    "class_list": args.class_list,
+                    "model_state": deepcopy(model).state_dict(),
+                    "optimizer_state": optimizer.state_dict(),
+                    "scheduler_state": scheduler.state_dict()}
+        torch.save(save_opt, weight_dir + "/last.pt")
+        
+        '''
+        if epoch % 10 == 0:
+            val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
+            mAP_dict, eval_text = validate(args=args, dataloader=val_loader, model=ema.module, evaluator=evaluator, epoch=epoch)
+            ap50 = mAP_dict["all"]["mAP_50"]
+            logging.warning(eval_text)
+
+            if ap50 > best_score:
+                result_analyis(args=args, mAP_dict=mAP_dict["all"])
+                best_epoch, best_score, best_mAP_str = epoch, ap50, eval_text
+                torch.save(save_opt, args.weight_dir / "best.pt")
+        '''
+
+        scheduler.step()
+
+    #logging.warning(f"[Best mAP at {best_epoch}]{best_mAP_str}")
 
 if __name__ == "__main__":
 

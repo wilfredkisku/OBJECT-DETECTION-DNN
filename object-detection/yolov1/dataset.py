@@ -50,7 +50,7 @@ class Dataset:
         return filename, image, label
 
     def to_tensor(self, image):
-        image = np.ascontiguousarray(image.transpose(0, 1))
+        image = np.ascontiguousarray(image)
         return torch.from_numpy(image).float()
 
     def get_image(self, index):

@@ -93,7 +93,13 @@ class Resize:
 class GrayScale:
     def __call__(self, image, boxes=None, labels=None):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image = np.reshape(image, (-1, image.shape[0], image.shape[1]))
         print(image.shape)
+        return image, boxes, labels
+
+class ConcatenateChannels:
+    def __call__(self, image, boxes=None, labels=None):
+        image = np.concatenate((image, image, image), axis=0)
         return image, boxes, labels
 
 class RandomBrightness:
@@ -168,8 +174,10 @@ class BasicTransform:
         mean = np.array(mean, dtype=np.float32)
         std = np.array(std, dtype=np.float32)
 
-        self.tfs = Compose([GrayScale(),
-                            Normalize(mean=mean, std=std)])
+        self.tfs = Compose([Resize(),
+                            GrayScale(),
+                            Normalize(mean=mean, std=std),
+                            ConcatenateChannels()])
 
     def __call__(self, image, boxes=None, labels=None):
         image = image.astype(np.float32)
@@ -181,6 +189,7 @@ class AugmentTransform:
         mean = np.array(mean, dtype=np.float32)
         std = np.array(std, dtype=np.float32)
         self.tfs = Compose([
+            Resize(),
             GrayScale(),
             #### Photometric Augment ####
             RandomBrightness(),
@@ -195,7 +204,8 @@ class AugmentTransform:
             #ToXcenYcenWH(),
             #############################
             #LetterBox(new_shape=input_size),
-            Normalize(mean=mean, std=std)
+            Normalize(mean=mean, std=std),
+            ConcatenateChannels()
         ])
 
     def __call__(self, image, boxes=None, labels=None):
