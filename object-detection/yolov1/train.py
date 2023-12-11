@@ -18,7 +18,10 @@ from dataset import Dataset
 from transform import BasicTransform, AugmentTransform
 from yolo import YoloModel
 from loss import YoloLoss
+
+#checked
 from logger import build_basic_logger
+
 from utils import generate_random_color
 from evaluate import Evaluator
 
@@ -34,8 +37,8 @@ lr_decay =  [90, 120]
 label_smoothing = 0.1
 conf_thres = 0.001
 nms_thres = 0.6
-workers = 1
-SEED = 42
+workers = 1 #verified
+SEED = 42 #verified
 
 weight_dir = os.path.join(os.getcwd(), "training")
 
@@ -90,13 +93,15 @@ def main_task(yaml_path, logger):
     #device = 'cpu'
     random.seed(SEED)
     torch.manual_seed(SEED)
+    
+    logging = logger
 
     global epoch
     
     train_dataset = Dataset(yaml_path=yaml_path, phase="train")
     train_transformer = AugmentTransform(input_size=input_size)
     train_dataset.load_transformer(transformer=train_transformer)
-    train_loader = DataLoader(dataset=train_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=workers)
+    train_loader = DataLoader(dataset=train_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=workers)
 
     val_dataset = Dataset(yaml_path=yaml_path, phase="val")
     val_transformer = BasicTransform(input_size=input_size)
@@ -156,10 +161,15 @@ def main_task(yaml_path, logger):
 
 if __name__ == "__main__":
 
+    
     yaml_path = "voc_person.yaml"
     
+    #logger + logger path
     logger_path = os.path.join(os.getcwd(), "experiments", "train_7_11_23_.log")
     logger = build_basic_logger(logger_path)
     
-    #rank=0, world_size=1, args=args, logger=logger
+    # rank=0 --> "Process id for computation"
+    # world_size=1 --> "Number of available GPU devices"
+    # logger=logger --> object returned for handling logging
+
     main_task(yaml_path, logger=logger)

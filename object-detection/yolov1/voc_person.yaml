@@ -1,16 +1,16 @@
-PATH: /home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive
+PATH: /home/wilfred/Desktop/object-detection/yolov1/data/
 
 TRAIN: 
- - images
+ - TrainImageFolder/images
 
-TRAIN_LABEL:
- - labels
+VAL_LABEL_PERSONS:
+ - val_labels_perons
 
 TRAIN_LABEL_PERSONS:
- - labels_persons_new
+ - train_labels_person
 
 VAL: 
- - test_images
+ - ValImageFolder/images
 
 VAL_FILE: voc-person-val.json
 

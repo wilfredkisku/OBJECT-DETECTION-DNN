@@ -150,3 +150,22 @@ def imwrite(filename, img):
     except Exception as e:
         print(e)
         return False
+
+def copyfiles(imgpath, srcpath, dst):
+    
+    srclst = os.listdir(srcpath)
+
+    import shutil
+    
+    for src in srclst:
+        print('File copied :: '+src)
+        shutil.copy(imgpath+'/'+src[:-4]+'.jpg', dst)
+    
+    return None
+
+if __name__ == "__main__":
+    img_path = '/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/images'
+    srcpath = '/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons'
+    dst = '/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images'
+    copyfiles(img_path, srcpath, dst)
+
