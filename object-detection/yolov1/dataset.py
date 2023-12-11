@@ -23,9 +23,13 @@ class Dataset:
         self.phase = phase
         self.class_list = data_item["CLASS_INFO"]
         
-        self.image_paths = [str(Path(data_item["PATH"]) / data_item["TRAIN"][0] / fn) for fn in os.listdir(Path(data_item["PATH"]) / data_item["TRAIN"][0]) if fn.lower().endswith(("png", "jpg", "jpeg"))]
+        self.image_paths = []
 
-        self.label_paths = self.replace_image2label_path(self.image_paths)
+        for sub_dir in data_item[self.phase.upper()]:
+            image_dir = Path(data_item["PATH"]) / sub_dir
+            self.image_paths += [str(image_dir / fn) for fn in os.listdir(image_dir) if fn.lower().endswith(("png", "jpg", "jpeg"))]
+
+        self.label_paths = self.replace_image2label_path(data_item, self.image_paths)
         self.generate_no_label(self.label_paths)
 
         self.mAP_filepath = None
@@ -66,10 +70,11 @@ class Dataset:
         return np.array(item, dtype=np.float32)
 
     #create labels from image paths
-    def replace_image2label_path(self, image_paths):
-        sa, sb = f"{os.sep}images{os.sep}", f"{os.sep}labels_persons_new{os.sep}"
-        return [sb.join(x.rsplit(sa, 1)).rsplit(".", 1)[0] + ".txt" for x in image_paths]
-    
+    def replace_image2label_path(self, data_item, image_paths):
+        #sa, sb = f"{os.sep}images{os.sep}", f"{os.sep}labels_persons_new{os.sep}"
+        #return [sb.join(x.rsplit(sa, 1)).rsplit(".", 1)[0] + ".txt" for x in image_paths]
+        return [str(Path(data_item["PATH"]) / data_item[(self.phase + "_labels_persons").upper()][0]) + "/" + x.split('/')[-1][:-4] + ".txt" for x in image_paths]
+
     #fill in files for no images (empty files for no class images)
     def generate_no_label(self, label_paths):
         for label_path in label_paths:
@@ -168,6 +173,12 @@ if __name__ == "__main__":
     train_transformer = AugmentTransform(input_size=input_size)
     train_dataset.load_transformer(transformer=train_transformer)
 
-    for data in train_dataset:
-        print(data)
-        break
+    val_dataset = Dataset(yaml_path=yaml_path, phase='val')
+    val_transformer = BasicTransform(input_size=input_size)
+    val_dataset.load_transformer(transformer=val_transformer)
+
+    print(len(train_dataset), len(val_dataset))
+
+    #for data in train_dataset:
+    #    print(data)
+    #    break

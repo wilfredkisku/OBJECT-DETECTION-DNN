@@ -3,11 +3,11 @@ PATH: /home/wilfred/Desktop/object-detection/yolov1/data/
 TRAIN: 
  - TrainImageFolder/images
 
-VAL_LABEL_PERSONS:
- - val_labels_perons
+VAL_LABELS_PERSONS:
+ - val_labels_persons
 
-TRAIN_LABEL_PERSONS:
- - train_labels_person
+TRAIN_LABELS_PERSONS:
+ - train_labels_persons
 
 VAL: 
  - ValImageFolder/images
