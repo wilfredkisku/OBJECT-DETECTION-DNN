@@ -167,6 +167,27 @@ class HorizontalFlip:
             boxes[:, 0::2] = width - boxes[:, 2::-2]
         return image, boxes, labels
 
+#image transforms 
+
+class SobelFilter:
+    def __call__(self, image, boxes=None, labels=None):
+        sobel_x = np.array([[-1, -2, -1],
+                            [ 0,  0,  0],
+                            [ 1,  2,  1]])
+        sobel_y = np.array([[-1,  0,  1],
+                            [-2,  0,  2],
+                            [-1,  0,  1]])
+
+        edge_x = cv2.filter2D(src=image/255., ddepth=-1, kernel=sobel_x)
+        edge_y = cv2.filter2D(src=image/255., ddepth=-1, kernel=sobel_y)
+        
+        gradient_magnitude = np.sqrt(np.square(edge_x) + np.square(edge_y))
+        gradient_magnitude *= 255.0 / gradient_magnitude.max()
+
+        image = gradient_magnitude.astype(np.uint8)
+
+        return image, boxes, labels
+
 ###condolidated transform classes
 class BasicTransform:
 
@@ -216,4 +237,30 @@ class AugmentTransform:
 if __name__ == "__main__":
     
     #for mean and std calculation
-    mean_and_std("/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/ImageFolder")
+    #mean_and_std("/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/ImageFolder")
+    
+    import matplotlib.pyplot as plt
+
+    image = cv2.imread('res/lena_gray_256.tif')
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #image = np.reshape(image, (-1, image.shape[0], image.shape[1]))
+    
+    sobel_x = np.array([[-1, -2, -1],
+                        [ 0,  0,  0],
+                        [ 1,  2,  1]])
+    sobel_y = np.array([[-1,  0,  1],
+                        [-2,  0,  2],
+                        [-1,  0,  1]])
+
+    edge_x = cv2.filter2D(src=image/255., ddepth=-1, kernel=sobel_x)
+    edge_y = cv2.filter2D(src=image/255., ddepth=-1, kernel=sobel_y)
+
+    gradient_magnitude = np.sqrt(np.square(edge_x) + np.square(edge_y))
+    #gradient_magnitude = edge_x + edge_y
+    gradient_magnitude *= 255.0 / gradient_magnitude.max()
+
+    image = gradient_magnitude.astype(np.uint8)
+    print(image)
+
+    plt.imshow(image.reshape(image.shape[0], image.shape[1]), cmap='gray')
+    plt.show()
