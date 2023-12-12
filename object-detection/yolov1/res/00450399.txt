@@ -1,0 +1,2 @@
+{"image_id": 2309, "width": 640, "height": 480}
+{"id": 9520, "image_id": 2309, "bbox": [553.04, 61.96, 17.74, 16.17], "area": 286.86, "iscrowd": 0, "category_id": 0, "segmentation": []}
