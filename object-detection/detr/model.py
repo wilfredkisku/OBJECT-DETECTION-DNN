@@ -151,11 +151,11 @@ class DETR(nn.Module):
         return probs, bboxes
 
 # Instantiate the DETR model
-num_classes = 91  # COCO dataset has 91 classes
+num_classes = 1  # COCO dataset has 91 classes
 detr_model = DETR(num_classes=num_classes)
 
 # Example usage
-input_tensor = torch.randn((3, 3, 256, 256))  # Example input tensor
+input_tensor = torch.randn((1, 3, 128, 128))  # Example input tensor
 #output_probs, output_bboxes = detr_model(input_tensor)
 
 # Print model architecture
