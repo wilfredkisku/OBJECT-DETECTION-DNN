@@ -119,21 +119,29 @@ if __name__ == "__main__":
     from torch import optim
     from torch.utils.data import DataLoader
     
-    from dataloader import Dataset, BasicTransform
-    from model import YoloModel
+    from dataset import Dataset, AugmentTransform
+    from yolo import YoloModel
 
-    yaml_path = ROOT / 'data' / 'toy.yaml'
+    device = 'cpu'
+    yaml_path = 'voc_person.yaml'
     input_size = 128
     batch_size = 32
     device = torch.device('cpu')
+    workers = 1
 
-    transformer = BasicTransform(input_size=input_size)
-    train_dataset = Dataset(yaml_path=yaml_path, phase='train')
-    train_dataset.load_transformer(transformer=transformer)
-    train_loader = DataLoader(dataset=train_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True, sampler=None)
+    train_dataset = Dataset(yaml_path=yaml_path, phase="train")
+    train_transformer = AugmentTransform(input_size=input_size)
+    train_dataset.load_transformer(transformer=train_transformer)
+    train_loader = DataLoader(dataset=train_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=workers)
+    #transformer = BasicTransform(input_size=input_size)
+    #train_dataset = Dataset(yaml_path=yaml_path, phase='train')
+    #train_dataset.load_transformer(transformer=transformer)
+    #train_loader = DataLoader(dataset=train_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True, sampler=None)
+    
     num_classes = len(train_dataset.class_list)
 
-    model = YoloModel(input_size=input_size, backbone="resnet18", num_classes=num_classes).to(device)
+    model = YoloModel(input_size=input_size, num_classes=num_classes, pretrained=True).to(device)
+    #model = YoloModel(input_size=input_size, backbone="resnet18", num_classes=num_classes).to(device)
     criterion = YoloLoss(grid_size=model.grid_size)
     optimizer = optim.SGD(model.parameters(), lr=0.0001)
     optimizer.zero_grad()

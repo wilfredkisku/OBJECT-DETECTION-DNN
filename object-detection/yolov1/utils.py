@@ -32,6 +32,24 @@ def generate_random_color(num_colors):
         color_list.append(rgb_color)
     return color_list
 
+def visualize_box(image, label, class_list, color_list, show_class=False, show_score=False, fontscale=0.7, thickness=2):
+    class_id = int(label[0])
+    box = label[1:5].astype(int)
+    if label[0] >= 0:
+        color = color_list[class_id]
+        x_min, y_min, x_max, y_max = box
+        cv2.rectangle(image, (x_min, y_min), (x_max, y_max), color=color, thickness=thickness)
+
+        if show_class:
+            class_name = class_list[class_id]
+            if show_score:
+                class_name += f'({label[-1]*100:.0f}%)'
+            ((text_width, text_height), _) = cv2.getTextSize(class_name, cv2.FONT_HERSHEY_SIMPLEX, fontscale, 2)
+            cv2.rectangle(image, (x_min, y_min - int(fontscale*2 * text_height)), (x_min + text_width, y_min), color, -1)
+            cv2.putText(image, text=class_name, org=(x_min, y_min - int((1-fontscale) * text_height)),
+                        fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=fontscale, color=TEXT_COLOR, lineType=cv2.LINE_AA)
+    return image
+
 def visualize(image, label, class_list, color_list, show_class=False, show_score=False):
     canvas = image.copy()
     for item in label:
@@ -162,10 +180,35 @@ def copyfiles(imgpath, srcpath, dst):
         shutil.copy(imgpath+'/'+src[:-4]+'.jpg', dst)
     
     return None
+############
+def utils_visualize(img_path):
+    #label = np.array([[0.48404687499999993, 0.52875, 0.1389375, 0.6580833333333334]])
+    #coord = transform_xcycwh_to_x1y1x2y2(label)
+    
+    x1,y1,w,h = int(416.93), int(37.46), 19.63, 60.13
+    
+    x2 = x1 + int(w)
+    y2 = y1 + int(h)
 
+    img = cv2.imread(img_path)
+    
+    color = (255, 0, 0)
+    cv2.rectangle(img, (x1, y1), (x2, y2), color, 1)
+    
+    import matplotlib.pyplot as plt
+
+    plt.imshow(img)
+    plt.show()
+
+    #cv2.imshow("test", img) 
+    #cv2.waitKey(0) 
+    #cv2.destroyAllWindows() 
+    return None
+############
 if __name__ == "__main__":
-    img_path = '/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/images'
-    srcpath = '/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons'
-    dst = '/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images'
-    copyfiles(img_path, srcpath, dst)
-
+    #img_path = '/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/images'
+    #srcpath = '/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons'
+    #dst = '/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images'
+    #copyfiles(img_path, srcpath, dst)
+    
+    utils_visualize('/home/wilfred/Desktop/object-detection/yolov1/res/000000059635.jpg')

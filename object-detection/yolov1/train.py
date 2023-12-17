@@ -26,7 +26,7 @@ from utils import generate_random_color
 from evaluate import Evaluator
 
 #constants
-device = 'cpu'
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 image_size = input_size = 128
 batch_size = 64
 num_epochs = 150
@@ -73,7 +73,7 @@ def train(dataloader, model, criterion, optimizer):
 
         for loss_name, loss_value in zip(loss_type, loss):
             if not torch.isfinite(loss_value) and loss_name != "multipart":
-                print(f"############## {loss_name} Loss is Nan/Inf ! {loss_value} ##############")
+                print(f'############## {loss_name} Loss is Nan/Inf ! {loss_value} ##############')
                 sys.exit(0)
             else:
                 losses[loss_name] += loss_value.item()
@@ -111,11 +111,13 @@ def main_task(yaml_path, logger):
     class_list = train_dataset.class_list
     color_list = generate_random_color(len(class_list))
     mAP_filepath = val_dataset.mAP_filepath
-
+    
+    
     #print(class_list, color_list, mAP_filepath)
-
+    
     model = YoloModel(input_size=input_size, num_classes=1, pretrained=True).to(device)
-    #macs, params = profile(deepcopy(model))
+    #macs, params = profile(deepcopy(model), inputs=(torch.randn(1, 3, image_size, image_size).to(device)), verbose=False)
+    #print(int(macs), int(params))
     criterion = YoloLoss(grid_size=model.grid_size, label_smoothing=label_smoothing)
     optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=momentum, weight_decay=weight_decay)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=lr_decay, gamma=0.1)
@@ -129,11 +131,12 @@ def main_task(yaml_path, logger):
     progress_bar = range(start_epoch, num_epochs+1)
     best_epoch, best_score, best_mAP_str, mAP_dict = 0, 0, "", None
     
+    
     for epoch in progress_bar:   
-        #train_loader = tqdm(train_loader, desc=f"[TRAIN:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
+        train_loader = tqdm(train_loader, desc=f"[TRAIN:{epoch:03d}/{num_epochs:03d}]", ncols=115, leave=False)
         train_loss_str = train(dataloader=train_loader, model=model, criterion=criterion, optimizer=optimizer)
         # clean the train code ------>
-        
+    '''    
         logging.warning(train_loss_str)
         save_opt = {"running_epoch": epoch,
                     "class_list": args.class_list,
@@ -142,7 +145,7 @@ def main_task(yaml_path, logger):
                     "scheduler_state": scheduler.state_dict()}
         torch.save(save_opt, weight_dir + "/last.pt")
         
-        '''
+        
         if epoch % 10 == 0:
             val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
             mAP_dict, eval_text = validate(args=args, dataloader=val_loader, model=ema.module, evaluator=evaluator, epoch=epoch)
@@ -153,20 +156,19 @@ def main_task(yaml_path, logger):
                 result_analyis(args=args, mAP_dict=mAP_dict["all"])
                 best_epoch, best_score, best_mAP_str = epoch, ap50, eval_text
                 torch.save(save_opt, args.weight_dir / "best.pt")
-        '''
 
         scheduler.step()
 
     #logging.warning(f"[Best mAP at {best_epoch}]{best_mAP_str}")
-
+    '''
 if __name__ == "__main__":
 
-    
     yaml_path = "voc_person.yaml"
     
-    #logger + logger path
+    #logger + logger path -> checked
     logger_path = os.path.join(os.getcwd(), "experiments", "train_7_11_23_.log")
     logger = build_basic_logger(logger_path)
+
     
     # rank=0 --> "Process id for computation"
     # world_size=1 --> "Number of available GPU devices"

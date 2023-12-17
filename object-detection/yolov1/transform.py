@@ -94,7 +94,7 @@ class GrayScale:
     def __call__(self, image, boxes=None, labels=None):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = np.reshape(image, (-1, image.shape[0], image.shape[1]))
-        print(image.shape)
+        #print(image.shape)
         return image, boxes, labels
 
 class ConcatenateChannels:

@@ -12,11 +12,12 @@ from tqdm import tqdm
 from transform import BasicTransform, AugmentTransform
 from utils import transform_xcycwh_to_x1y1wh
 
-### label --> txt file --> [label, width_c, height_c, width_obj, height_obj]
-### iamge --> rescaled --> (128, 128)
+### label --> txt file --> [label, x_c, y_c, width_obj, height_obj]
+### image --> rescaled --> (128, 128)
 
 class Dataset:
     def __init__(self, yaml_path, phase="train"):
+        # phase decides the dataset generation
         with open(yaml_path, mode="r") as f:
             data_item = yaml.load(f, Loader=yaml.FullLoader)
 

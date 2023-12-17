@@ -83,12 +83,13 @@ class YoloModel(nn.Module):
         self.grid_y = grid_y.contiguous().view((1, -1))
         
         print("loading weights...")
+        
         if pretrained:
             ckpt = torch.load("yolov1_pretrained/yolov1-resnet18.pt", map_location="cpu")
             self.load_state_dict(ckpt["model_state"], strict=False)
 
     def forward(self, x):
-        print("in forward...")
+        #print("in forward...")
         self.device = x.device
         
         out = self.backbone(x)
