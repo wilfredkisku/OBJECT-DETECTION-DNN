@@ -24,6 +24,7 @@ from logger import build_basic_logger
 
 from utils import generate_random_color
 from evaluate import Evaluator
+from val import validate
 
 #constants
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -57,19 +58,16 @@ def train(dataloader, model, criterion, optimizer):
     for i, minibatch in enumerate(dataloader):
         
         #set_lr(optimizer, args.base_lr * pow(ni / (args.nw), 4))
+        # filenames, images, labels, size
         images, labels = minibatch[1], minibatch[2]
         
         #predictions + loss calculation
         predictions = model(images).to(device)
         loss = criterion(predictions=predictions, labels=labels)
-
-        #if ni - args.last_opt_step >= args.grad_accumulate:
-        #    scaler.step(optimizer)
-        #    scaler.update()
-        #    optimizer.zero_grad()
-        #    if ema is not None:
-        #        ema.update(model)
-        #    args.last_opt_step = ni
+        
+        loss[0].backward()
+        optimizer.step()
+        optimizer.zero_grad()
 
         for loss_name, loss_value in zip(loss_type, loss):
             if not torch.isfinite(loss_value) and loss_name != "multipart":
@@ -86,6 +84,7 @@ def train(dataloader, model, criterion, optimizer):
     for loss_name in loss_type:
         losses[loss_name] /= len(dataloader)
         loss_str += f"{loss_name}: {losses[loss_name]:.4f}  "
+    
     return loss_str
 
 def main_task(yaml_path, logger):
@@ -108,11 +107,11 @@ def main_task(yaml_path, logger):
     val_dataset.load_transformer(transformer=val_transformer)
     val_loader = DataLoader(dataset=val_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=workers)
     
+    #pass the terms to validate
     class_list = train_dataset.class_list
     color_list = generate_random_color(len(class_list))
     mAP_filepath = val_dataset.mAP_filepath
-    
-    
+        
     #print(class_list, color_list, mAP_filepath)
     
     model = YoloModel(input_size=input_size, num_classes=1, pretrained=True).to(device)
@@ -135,8 +134,7 @@ def main_task(yaml_path, logger):
     for epoch in progress_bar:   
         train_loader = tqdm(train_loader, desc=f"[TRAIN:{epoch:03d}/{num_epochs:03d}]", ncols=115, leave=False)
         train_loss_str = train(dataloader=train_loader, model=model, criterion=criterion, optimizer=optimizer)
-        # clean the train code ------>
-    '''    
+
         logging.warning(train_loss_str)
         save_opt = {"running_epoch": epoch,
                     "class_list": args.class_list,
@@ -144,11 +142,12 @@ def main_task(yaml_path, logger):
                     "optimizer_state": optimizer.state_dict(),
                     "scheduler_state": scheduler.state_dict()}
         torch.save(save_opt, weight_dir + "/last.pt")
-        
-        
+    
+    #cleared    
+    '''        
         if epoch % 10 == 0:
             val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
-            mAP_dict, eval_text = validate(args=args, dataloader=val_loader, model=ema.module, evaluator=evaluator, epoch=epoch)
+            mAP_dict, eval_text = validate(class_list=class_list, color_list=color_list, mAP_filepath=mAP_filepath, dataloader=val_loader, model=model, evaluator=evaluator, epoch=epoch)
             ap50 = mAP_dict["all"]["mAP_50"]
             logging.warning(eval_text)
 

@@ -64,6 +64,13 @@ def visualize_target(image, label, class_list, color_list):
     image = visualize(image, label_xcycwh, class_list, color_list, show_class=True, show_score=False)
     return image
 
+def visualize_prediction(image, prediction, class_list, color_list):
+    input_size = image.shape[0]
+    if len(prediction) > 0:
+        prediction[:, 1:5] *= input_size
+        image = visualize(image, prediction, class_list, color_list, show_class=True, show_score=True)
+    return image
+
 #grid set
 def scale_coords(img1_shape, coords, img0_shape):
     # Rescale coords (xyxy) from img1_shape to img0_shape
@@ -180,7 +187,7 @@ def copyfiles(imgpath, srcpath, dst):
         shutil.copy(imgpath+'/'+src[:-4]+'.jpg', dst)
     
     return None
-############
+
 def utils_visualize(img_path):
     #label = np.array([[0.48404687499999993, 0.52875, 0.1389375, 0.6580833333333334]])
     #coord = transform_xcycwh_to_x1y1x2y2(label)
@@ -204,7 +211,7 @@ def utils_visualize(img_path):
     #cv2.waitKey(0) 
     #cv2.destroyAllWindows() 
     return None
-############
+
 if __name__ == "__main__":
     #img_path = '/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/images'
     #srcpath = '/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons'
