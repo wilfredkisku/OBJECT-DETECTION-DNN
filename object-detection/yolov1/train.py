@@ -22,7 +22,7 @@ from loss import YoloLoss
 #checked
 from logger import build_basic_logger
 
-from utils import generate_random_color
+from utils import generate_random_color, result_analyis
 from evaluate import Evaluator
 from val import validate
 
@@ -143,8 +143,6 @@ def main_task(yaml_path, logger):
                     "scheduler_state": scheduler.state_dict()}
         torch.save(save_opt, weight_dir + "/last.pt")
     
-    #cleared    
-    '''        
         if epoch % 10 == 0:
             val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
             mAP_dict, eval_text = validate(class_list=class_list, color_list=color_list, mAP_filepath=mAP_filepath, dataloader=val_loader, model=model, evaluator=evaluator, epoch=epoch)
@@ -154,12 +152,12 @@ def main_task(yaml_path, logger):
             if ap50 > best_score:
                 result_analyis(args=args, mAP_dict=mAP_dict["all"])
                 best_epoch, best_score, best_mAP_str = epoch, ap50, eval_text
-                torch.save(save_opt, args.weight_dir / "best.pt")
+                torch.save(save_opt, weight_dir + "/best.pt")
 
         scheduler.step()
 
-    #logging.warning(f"[Best mAP at {best_epoch}]{best_mAP_str}")
-    '''
+    logging.warning(f"[Best mAP at {best_epoch}]{best_mAP_str}")
+
 if __name__ == "__main__":
 
     yaml_path = "voc_person.yaml"
