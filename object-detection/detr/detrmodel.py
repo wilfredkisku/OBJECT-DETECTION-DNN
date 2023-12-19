@@ -27,3 +27,23 @@ class DETRMODEL(nn.Module):
         self.transformer = nn.Transformer(hidden_dim, nheads, num_encoder_layers, num_decoder_layers)
         self.linear_class = nn.Linear(hidde_dim, num_classes + 1)
         self.linear_bbox = nn.Linear(hidden_dim, 4)
+
+        self.query_pos = nn.Parameter(torch.rand(100, hidden_dim))
+
+        self.row_embed = nn.Parameter(torch.rand(50, hidden_dim // 2))
+        self.col_embed = nn.Parameter(torch.rand(50, hidden_dim // 2))
+
+    def forward(self, inputs):
+        x = self.backbone.conv1(inputs)
+        x = self.backbone.bn1(x)
+        x = self.backbone.relu(x)
+        x = self.backbone.maxpool(x)
+
+        x = self.backbone.layer1(x)
+        x = self.backbone.layer2(x)
+        x = self.backbone.layer3(x)
+        x = self.backbone.layer4(x)
+
+        h = self.conv(x)
+
+
