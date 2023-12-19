@@ -1,4 +1,5 @@
 import os
+os.environ['MPLCONFIGDIR'] = '/workspace/storage/object-detection/yolov1/tmp/'
 import sys
 import json
 from pathlib import Path

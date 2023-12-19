@@ -22,9 +22,9 @@ from loss import YoloLoss
 #checked
 from logger import build_basic_logger
 
-from utils import generate_random_color, result_analyis
+from utils import generate_random_color
 from evaluate import Evaluator
-from val import validate
+from validate import result_analyis, validate
 
 #constants
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -41,7 +41,7 @@ nms_thres = 0.6
 workers = 1 #verified
 SEED = 42 #verified
 
-weight_dir = os.path.join(os.getcwd(), "training")
+weight_dir = os.path.join("/workspace/storage/object-detection/yolov1", "training")
 
 def train(dataloader, model, criterion, optimizer):
     #loss types 
@@ -62,7 +62,7 @@ def train(dataloader, model, criterion, optimizer):
         images, labels = minibatch[1], minibatch[2]
         
         #predictions + loss calculation
-        predictions = model(images).to(device)
+        predictions = model(images.to(device))
         loss = criterion(predictions=predictions, labels=labels)
         
         loss[0].backward()
@@ -137,20 +137,21 @@ def main_task(yaml_path, logger):
 
         logging.warning(train_loss_str)
         save_opt = {"running_epoch": epoch,
-                    "class_list": args.class_list,
+                    "class_list": class_list,
                     "model_state": deepcopy(model).state_dict(),
                     "optimizer_state": optimizer.state_dict(),
                     "scheduler_state": scheduler.state_dict()}
         torch.save(save_opt, weight_dir + "/last.pt")
     
         if epoch % 10 == 0:
-            val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{args.num_epochs:03d}]", ncols=115, leave=False)
+            val_loader = tqdm(val_loader, desc=f"[VAL:{epoch:03d}/{num_epochs:03d}]", ncols=115, leave=False)
             mAP_dict, eval_text = validate(class_list=class_list, color_list=color_list, mAP_filepath=mAP_filepath, dataloader=val_loader, model=model, evaluator=evaluator, epoch=epoch)
             ap50 = mAP_dict["all"]["mAP_50"]
             logging.warning(eval_text)
 
             if ap50 > best_score:
-                result_analyis(args=args, mAP_dict=mAP_dict["all"])
+                #check the args required
+                result_analyis(class_list, mAP_dict=mAP_dict["all"])
                 best_epoch, best_score, best_mAP_str = epoch, ap50, eval_text
                 torch.save(save_opt, weight_dir + "/best.pt")
 
@@ -160,10 +161,10 @@ def main_task(yaml_path, logger):
 
 if __name__ == "__main__":
 
-    yaml_path = "voc_person.yaml"
+    yaml_path = "/workspace/storage/object-detection/yolov1/voc_person.yaml"
     
     #logger + logger path -> checked
-    logger_path = os.path.join(os.getcwd(), "experiments", "train_7_11_23_.log")
+    logger_path = os.path.join('/workspace/storage/object-detection/yolov1', "experiments", "train_7_11_23_.log")
     logger = build_basic_logger(logger_path)
 
     

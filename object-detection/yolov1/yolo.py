@@ -85,7 +85,7 @@ class YoloModel(nn.Module):
         print("loading weights...")
         
         if pretrained:
-            ckpt = torch.load("yolov1_pretrained/yolov1-resnet18.pt", map_location="cpu")
+            ckpt = torch.load("/workspace/storage/object-detection/yolov1/yolov1_pretrained/yolov1-resnet18.pt", map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
             self.load_state_dict(ckpt["model_state"], strict=False)
 
     def forward(self, x):

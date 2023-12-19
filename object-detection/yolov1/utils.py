@@ -202,7 +202,7 @@ def utils_visualize(img_path):
     color = (255, 0, 0)
     cv2.rectangle(img, (x1, y1), (x2, y2), color, 1)
     
-    import matplotlib.pyplot as plt
+    #import matplotlib.pyplot as plt
 
     plt.imshow(img)
     plt.show()
@@ -335,10 +335,11 @@ def visualize_class_dist(class_ids, class_list, rotation=60):
     fig = ax.get_figure()
     fig.tight_layout()
     return fig
+
 if __name__ == "__main__":
     #img_path = '/home/wilfred/Documents/DGX-BACKUP/data/PASCAL-VOC/archive/images'
     #srcpath = '/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons'
     #dst = '/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images'
     #copyfiles(img_path, srcpath, dst)
     
-    utils_visualize('/home/wilfred/Desktop/object-detection/yolov1/res/000000059635.jpg')
+    utils_visualize('/workspace/storage/object-detection/yolov1/res/000000059635.jpg')

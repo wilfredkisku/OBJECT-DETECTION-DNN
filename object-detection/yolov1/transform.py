@@ -5,8 +5,8 @@ from tqdm import tqdm
 #from dataset import Dataset
 from torchvision import datasets, transforms
 
-MEAN = 0.4333
-STD = 0.2194
+MEAN = 0.4333, 0.4333, 0.4333
+STD = 0.2194, 0.2194, 0.2194
 
 ################# calculate the mean and std ######################
 

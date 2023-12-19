@@ -17,14 +17,32 @@ from yolo import YoloModel
 
 from logger import build_basic_logger
 
-from utils import generate_random_color, transform_xcycwh_to_x1y1x2y2, filter_confidence, run_NMS, scale_coords, transform_x1y1x2y2_to_x1y1wh, imwrite, visualize_prediction
+from utils import generate_random_color, transform_xcycwh_to_x1y1x2y2, filter_confidence, run_NMS, scale_coords, transform_x1y1x2y2_to_x1y1wh, imwrite, visualize_prediction, analyse_mAP_info
 
 SEED = 42
 torch.manual_seed(SEED)
 TIMESTAMP = datetime.today().strftime("%Y-%m-%d_%H-%M")
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+#MEAN = 0.4333
+#STD = 0.2194
+
+def to_tensor(image):
+    image = np.ascontiguousarray(image.transpose(2, 0, 1))
+    return torch.from_numpy(image).float()
+
+
+def to_image(tensor, mean=(0.4333, 0.4333, 0.4333), std=(0.2194, 0.2194, 0.2194)):
+    denorm_tensor = tensor.clone()
+    for t, m, s in zip(denorm_tensor, mean, std):
+        t.mul_(s).add_(m)
+    denorm_tensor.clamp_(min=0, max=1.)
+    denorm_tensor *= 255
+    image = denorm_tensor.permute(1,2,0).numpy().astype(np.uint8)
+    return image
 
 @torch.no_grad()
-def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator, epoch=0, save_result=False, conf_thres = 0.001, nms_thres = 0.6, img_log_dir="/home/wilfred/Desktop/object-detection/yolov1/experiments/training-image"):
+def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator, epoch=0, save_result=False, conf_thres = 0.001, nms_thres = 0.6, img_log_dir="/workspace/storage/object-detection/yolov1/experiments/training-image"):
     
     model.eval()
     
@@ -37,7 +55,7 @@ def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator,
 
     for _, minibatch in enumerate(dataloader):
         filenames, images, shapes = minibatch[0], minibatch[1], minibatch[3]
-        predictions = model(images).to(device)
+        predictions = model(images.to(device))
 
         for j in range(len(filenames)):
             prediction = predictions[j].cpu().numpy()
@@ -75,12 +93,12 @@ def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator,
         mAP_dict, eval_text = evaluator(predictions=cocoPred)
 
         if save_result:
-            np.savetxt("/home/wilfred/Desktop/object-detection/yolov1/experiments/predictions.txt", cocoPred, fmt="%.4f", delimiter=",", header=f"Inference results of [image_id, x1y1wh, score, label] on {TIMESTAMP}")
+            np.savetxt("/workspace/storage/object-detection/yolov1/experiments/predictions.txt", cocoPred, fmt="%.4f", delimiter=",", header=f"Inference results of [image_id, x1y1wh, score, label] on {TIMESTAMP}")
         return mAP_dict, eval_text
     else:
         return None, None
 
-def result_analyis(class_list, mAP_dict, path="/home/wilfred/Desktop/object-detection/yolov1/experiments"):
+def result_analyis(class_list, mAP_dict, path="/workspace/storage/object-detection/yolov1/experiments"):
     analysis_result = analyse_mAP_info(mAP_dict, class_list)
     data_df, figure_AP, figure_dets, fig_PR_curves = analysis_result
     data_df.to_csv(str(path + f"/result-AP.csv"))
@@ -89,5 +107,5 @@ def result_analyis(class_list, mAP_dict, path="/home/wilfred/Desktop/object-dete
     PR_curve_dir = path + "/PR-curve" 
     os.makedirs(PR_curve_dir, exist_ok=True)
     for class_id in fig_PR_curves.keys():
-        fig_PR_curves[class_id].savefig(str(PR_curve_dir + f"/{args.class_list[class_id]}.jpg"))
+        fig_PR_curves[class_id].savefig(str(PR_curve_dir + f"/{class_list[class_id]}.jpg"))
         fig_PR_curves[class_id].clf()
