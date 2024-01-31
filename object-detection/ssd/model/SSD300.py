@@ -4,8 +4,8 @@ import torch
 import sys
 import math
 
-from vgg import VGG16BaseNet, AuxiliaryNet, PredictionNet
-from L2Norm import L2Norm
+from model.vgg import VGG16BaseNet, AuxiliaryNet, PredictionNet
+from model.L2Norm import L2Norm
 
 from utils import xy_to_cxcy, cxcy_to_xy, encode_bboxes, decode_bboxes, find_IoU
 
