@@ -25,14 +25,23 @@ batch_size = 16
 iterations = 145000
 
 def main():
+    ## GLOBAL VARIABLES  
+    ## start_epoch  :: start at 0
+    ## label_map    :: {'background':0, 'person':1}
+    ## epoch        :: # of epoch run
+    ## checkpoint   :: path to model checkpoint (saved)
+    ## decay_lr_at  :: learning rate decay
     global start_epoch, label_map, epoch, checkpoint, decay_lr_at
 
+    # initialize model or load checkpoint
+
+    #initialize model
     if checkpoint is None:
         start_epoch = 0
         model = SSD300(num_classes)
         biases = list()
         not_biases = list()
-
+        #extract the params {biases and not_biases}
         for param_name, param in model.named_parameters():
             if param.requires_grad:
                 if param_name.endswith(".bias"):
@@ -41,13 +50,14 @@ def main():
                     not_biases.append(param)
 
         optimizer = optim.SGD(params= [{'params': biases,"lr": 2* lr}, {"params": not_biases}], lr = lr, momentum = momentum, weight_decay = weight_decay)
-
+    #load checkpoint
     else:
         checkpoint = torch.load(checkpoint)
         start_epoch = checkpoint['epoch'] + 1
         print('\nLoaded checkpoint from epoch %d.\n' % start_epoch)
         model = checkpoint['model']
         optimizer = checkpoint['optimizer']
+        
         if adjust_optim is not None:
             print("Adjust optimizer....")
             print(lr)
