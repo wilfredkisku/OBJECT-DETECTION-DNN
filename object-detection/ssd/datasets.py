@@ -1,6 +1,8 @@
 import torch
 from torch.utils.data import Dataset
 import json
+import cv2
+import numpy as np
 import os
 from PIL import Image
 from utils import transform
@@ -53,22 +55,17 @@ def printer(info):
 def read_json(path_img, path_anno, path_coco, data="COCO"):
     
     if data == "PASCAL": 
-        #print(len(os.listdir(path_anno)))
-        #print(len(os.listdir(path_img)))
 
         anno_f = os.listdir(path_anno)
+        
         for f in anno_f:
             file_path = os.path.join(path_anno,f)
             img_path = os.path.join(path_img,f[:-3]+"jpg")
             try:
-                # Parse the XML file
+                #PARSE THE XML FILE
                 tree = ET.parse(file_path)
                 root = tree.getroot()
 
-                #print(root.tag)
-                
-                #for child in root:
-                #    print(child.tag, child.attrib)
                 bboxes = []
                 bbox = {}
 
@@ -84,7 +81,6 @@ def read_json(path_img, path_anno, path_coco, data="COCO"):
                     #bbox['ymin'] = int(obj.find('bndbox').find('ymin').text)
                     #bbox['xmax'] = int(obj.find('bndbox').find('xmax').text)
                     #bbox['ymax'] = int(obj.find('bndbox').find('ymax').text)
-                    #bbox["boxes"] = [int(obj.find('bndbox').find('xmin').text), int(obj.find('bndbox').find('ymin').text), int(obj.find('bndbox').find('xmax').text), int(obj.find('bndbox').find('ymax').text)]
                     #bbox["labels"] = obj.find('name').text
                     #bbox["difficult"] = int(obj.find('difficult').text)
                     #if bbox['labels'] == 'person':
@@ -125,36 +121,45 @@ def read_json(path_img, path_anno, path_coco, data="COCO"):
                 print("Error parsing XML file.")
     else:
 
-        ##Read the coco-annotations
+        ##READ THE COCO-ANNOTATIONS
         f = open(path_coco)
         data = json.load(f)
-        '''returns --> [{image_id:..., bbox:[[]...], labels:[...], difficulties:[...]}]'''
         
-        ##Info Extraction
+        '''
+        returns --> [{image_id:..., bbox:[[]...], labels:[...], difficulties:[...]}]
+        count --> 4952
+        '''
+        
+        ##INFO EXTRACTION
         dict_list = []
         unique_img_id = []
+        
+        count = 0
 
         for d in data['annotations']:
+            
+            #DEBUG LINE
+            #print(d['image_id'], d['bbox'], d['category_id'])
+            
+            dict_ = {}
+            
             if d['image_id'] not in unique_img_id:
                 unique_img_id.append(d['image_id'])
+                dict_['image_id'] = d['image_id']
+                dict_['bbox'] = [d['bbox']]
+                dict_['labels'] = [d['category_id']]
+                dict_list.append(dict_)
+            else:
+                for item in dict_list:
+                    if item['image_id'] == d['image_id']:
+                        item['bbox'].append(d['bbox'])
+                        item['labels'].append(d['category_id'])
+
             count += 1
         
-        #print("COUNT :: "+str(count))
-        #print("COUNT UNIQUE :: "+str(len(unique_img_id)))
-        #print(unique_img_id) 
-       
-        unique_img_id_dict = {}
-
-        #print(unique_img_id_dict.fromkeys(unique_img_id))
-
-        ## fill in the image_ids
-
-        ## fill in the bboxes
-
-        ## fill in the labels
-
-        ## fill in the difficulties
-
+        print(dict_list)
+        print("DICT COUNT :: "+str(len(dict_list)))
+        print("COUNT UNIQUE :: "+str(len(unique_img_id)))
 
     return None
 
@@ -163,15 +168,12 @@ def text_parse(data_path, anno_path):
     d_files = os.listdir(data_path)
     a_files = os.listdir(anno_path)
 
-    print(len(d_files))
-    print(len(a_files))
-    
     img_path = os.path.join(data_path, d_files[0])
 
-    import cv2
-    import numpy as np
     img = cv2.imread(img_path)
+    
     '''[cx, cy, w, h], [height, width, channels]'''
+    
     with open(os.path.join(anno_path, d_files[0][:-3]+'txt')) as file:
         lines = [line.rstrip().split() for line in file]
     
@@ -197,8 +199,6 @@ def text_parse(data_path, anno_path):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     
-    #print(x1y1, x2y2)
-
     return None
 
 if __name__ == "__main__":
