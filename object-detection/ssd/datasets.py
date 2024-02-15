@@ -47,10 +47,6 @@ class VOCDataset(Dataset):
 
         return new_image, new_boxes, new_labels, new_difficulties
 
-def printer(info):
-    '''
-    '''
-    return None
 
 def read_json(path_img, path_anno, path_coco, data="COCO"):
     
@@ -165,23 +161,72 @@ def read_json(path_img, path_anno, path_coco, data="COCO"):
 
 def text_parse(data_path, anno_path):
     
+    ##LIST OF IMAGE FILES AND ANNOTATION FILES
     d_files = os.listdir(data_path)
     a_files = os.listdir(anno_path)
 
-    img_path = os.path.join(data_path, d_files[0])
-
-    img = cv2.imread(img_path)
+    #img_path = os.path.join(data_path, d_files[0])
+    #img = cv2.imread(img_path)
     
     '''[cx, cy, w, h], [height, width, channels]'''
     
-    with open(os.path.join(anno_path, d_files[0][:-3]+'txt')) as file:
-        lines = [line.rstrip().split() for line in file]
-    
-    new_lines = [] 
-    
-    for l in lines:
-        new_lines.append([float(li) for _, li in enumerate(l)])
+    ##EXTRACT FILES AND ANNOTATION LINES
+    data_con = []
+    path_con = []
+    for d_f in d_files:
+        with open(os.path.join(anno_path, d_f[:-3]+'txt')) as file:
+            lines = [line.rstrip().split() for line in file]
+        
+        path_con.append(os.path.join(data_path, d_f))
+        new_lines = []
+        new_lines_dict = {key: [] for key in ["boxes", "labels", "difficulties"]}
+        
+        for l in lines:
+            
+            line = [float(li) for _, li in enumerate(l)]
+            
+            new_lines.append(line)
+            
+            img_path = os.path.join(data_path, d_f)
+            img = cv2.imread(img_path)
+            
+            h = img.shape[0]
+            w = img.shape[1]
 
+            # x--> width, y--> height
+            x1 = line[1] - line[3] / 2
+            y1 = line[2] - line[4] / 2
+
+            x2 = line[1] + line[3] / 2
+            y2 = line[2] + line[4] / 2
+            
+            #print(int(w*x1), int(h*y1), int(w*x2), int(h*y2), ((x2-x1)*(y2-y1)*100))
+            if (x2-x1)*(y2-y1)*100 < 1.0:
+                #print('Difficult..')
+                #cv2.rectangle(img, (int(w*x1), int(h*y1)), (int(w*x2), int(h*y2)), color=(0,255,0), thickness=2)
+                #cv2.imshow("image", img)
+                #cv2.waitKey(0)
+                #cv2.destroyAllWindows()
+                difficulty = 1
+            else:
+                #print('Easy..')
+                difficulty = 0
+            
+            new_lines_dict["boxes"].append([int(w*x1), int(h*y1), int(w*x2), int(h*y2)])
+            new_lines_dict["labels"].append(1)
+            new_lines_dict["difficulties"].append(difficulty)
+
+        data_con.append(new_lines_dict)
+    
+    #print(data_con)
+    with open('TRAIN_objects.json', 'w') as f:
+        f.write(str(data_con))
+
+    with open('TRAIN_images.json', 'w') as f:
+        f.write(str(path_con))
+    #print(os.path.join(data_path, d_f),len(new_lines))
+
+    '''
     #verified
     h = img.shape[0]
     w = img.shape[1]
@@ -198,19 +243,18 @@ def text_parse(data_path, anno_path):
     cv2.imshow("image", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+    '''
+
     return None
 
 if __name__ == "__main__":
 
-    coco_path = "/home/wilfred/dataset/COCO/archive/coco2017/annotations/instances_val2017.json"
-    json_path = "/home/wilfred/dataset/VOCtrainval_11-May-2012/VOCdevkit/VOC2012/Annotations"
-    img_path = "/home/wilfred/dataset/VOCtrainval_11-May-2012/VOCdevkit/VOC2012/JPEGImages"
-    read_json(img_path, json_path, coco_path, "COCO")
+    #coco_path = "/home/wilfred/dataset/COCO/archive/coco2017/annotations/instances_val2017.json"
+    #json_path = "/home/wilfred/dataset/VOCtrainval_11-May-2012/VOCdevkit/VOC2012/Annotations"
+    #img_path = "/home/wilfred/dataset/VOCtrainval_11-May-2012/VOCdevkit/VOC2012/JPEGImages"
+    #read_json(img_path, json_path, coco_path, "COCO")
 
-    #data_path = "/home/wilfred/Desktop/object-detection/yolov1/data/ValImageFolder/images"
-    #anno_path = "/home/wilfred/Desktop/object-detection/yolov1/data/val_labels_persons"
+    data_path = "/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images"
+    anno_path = "/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons"
 
-    #text_parse(data_path, anno_path)
-
-
+    text_parse(data_path, anno_path)
