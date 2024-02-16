@@ -139,7 +139,7 @@ def lighting_noise(image):
         swap = perms[random.randint(0, len(perms)-1)]
 
         new_image = F.to_tensor(new_image)
-        new_image = new_image[swao, :, :]
+        new_image = new_image[swap, :, :]
         new_image = F.to_pil_image(new_image)
 
     return new_image

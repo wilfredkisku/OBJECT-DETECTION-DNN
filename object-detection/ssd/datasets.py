@@ -1,9 +1,11 @@
-import torch
-from torch.utils.data import Dataset
-import json
-import cv2
-import numpy as np
 import os
+import ast
+import cv2
+import json
+import torch
+import numpy as np
+
+from torch.utils.data import Dataset
 from PIL import Image
 from utils import transform
 import xml.etree.ElementTree as ET
@@ -20,11 +22,14 @@ class VOCDataset(Dataset):
         self.DataFolder = DataFolder
 
         #read data file from json file
+        ## READ WITH AST
         with open(os.path.join(DataFolder, self.split+ '_images.json'), 'r') as j:
-            self.images = json.load(j)
-        
+            #self.images = json.load(j)
+            self.images = ast.literal_eval(j.read())
+
         with open(os.path.join(DataFolder, self.split+ '_objects.json'), 'r') as j:
-            self.objects = json.load(j)
+            #self.objects = json.load(j)
+            self.objects = ast.literal_eval(j.read())
 
         assert len(self.images) == len(self.objects)
 
@@ -254,7 +259,14 @@ if __name__ == "__main__":
     #img_path = "/home/wilfred/dataset/VOCtrainval_11-May-2012/VOCdevkit/VOC2012/JPEGImages"
     #read_json(img_path, json_path, coco_path, "COCO")
 
-    data_path = "/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images"
-    anno_path = "/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons"
+    #data_path = "/home/wilfred/Desktop/object-detection/yolov1/data/TrainImageFolder/images"
+    #anno_path = "/home/wilfred/Desktop/object-detection/yolov1/data/train_labels_persons"
 
-    text_parse(data_path, anno_path)
+    #text_parse(data_path, anno_path)
+
+    from utils import combine
+
+    train_dataset = VOCDataset('./', split= "train")
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size= 8, shuffle= True, collate_fn= combine, pin_memory = True)
+    data = next(iter(train_loader))
+    print(data[2].shape)
