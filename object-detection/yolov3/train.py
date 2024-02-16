@@ -6,11 +6,14 @@ from logger import build_basic_logger
 from dataset import Dataset
 from transform import BasicTransform, AugmentTransform
 
+from thom import profile
 from torch import nn
 from torch import optim
 from pathlib import Path
 from torch.utils.data import DataLoader
 
+from model import YoloModel
+from utils import (generate_random_color)
 #constants 
 SEED = 42 
 
@@ -33,6 +36,13 @@ def main_work(logger):
     val_dataset.load_transformer(transformer=val_transformer)
     val_loader = DataLoader(dataset=val_dataset, collate_fn=Dataset.collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=workers)
 
+    anchors = train_dataset.anchors
+    class_list = train_dataset.class_list
+    color_list = generate_random_color(len(class_list))
+    mAP_filepath = val_dataset.mAP_filepath
+    model_type = "base"
+
+    model = YoloModel(input_size = img_size, num_classes=len(class_list), anchors = anchors, model_type = model_type, pretrained=True)
 
 
 if __name__ == "__main__":
