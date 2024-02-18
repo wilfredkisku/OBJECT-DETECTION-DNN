@@ -47,7 +47,19 @@ def main():
         load_checkpoint(torch.load(LOAD_MODEL_FILE), model, optimizer)
 
     train_dataset = VOCDataset("data/100examples.csv", transform=transform, img_dir=ING_DIR, label_dir=LABEL_DIR)
+    test_dataset = VOCDataset("data/test.csv", transform=transform, img_dir=IMG_DIR, label_dir = LABEL_DIR)
 
+    train_loader = DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
+    test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
+
+    for epoch in range(EPOCHS):
+
+        pred_boxes, target_boxes = get_boxes(train_loader, model, iou_threshold=0.5, threshold=0.4)
+        mean_avg_prec = mean_average_precision(pred_boxes, target_boxes, iou_threshold=0.5, box_format="midpoint")
+
+        print(f"Train mAP: {mean_avg_prec}")
+
+        train_fn(train_loader, model, optimizer, loss_fn)
 
 if __name__ == "__main__":
     main()
