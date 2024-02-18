@@ -42,6 +42,12 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
 
     loss_fn = YoloLoss()
+    
+    if LOAD_MODEL:
+        load_checkpoint(torch.load(LOAD_MODEL_FILE), model, optimizer)
+
+    train_dataset = VOCDataset("data/100examples.csv", transform=transform, img_dir=ING_DIR, label_dir=LABEL_DIR)
+
 
 if __name__ == "__main__":
     main()
