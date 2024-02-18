@@ -36,6 +36,24 @@ class Compose(object):
 
 transform = Compose([transforms.Resize((448, 448)), transforms.ToTensor(),])
 
+def train_fn(train_loader, model, optimizer, loss_fn):
+    
+    loop = tqdm(train_loader, leave=True)
+    mean_loss = []
+
+    for batch_idx, (x, y) in enumerate(loop):
+        x, y = x.to(DEVICE), y.to(DEVICE)
+        out = model(x)
+        loss = loss_fn(out, y)
+        mean_loss.append(loss.item())
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        loop.set_postfix(loss=loss.item())
+
+    print(f"Mean loss was {sum(mean_loss)/len(mean_loss)}")
+
 def main():
 
     model = Yolov1(split_size=7, num_boxes=2, num_classes=1).to(DEVICE)
