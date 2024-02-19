@@ -39,14 +39,18 @@ def intersection_over_union(boxes_preds, boxes_labels, box_format="midpoint"):
 
     return intersection / (box1_area + box2_area - intersection + 1e-6)
 
+#NON MAX SUPPRESSION
 def non_max_suppression(bboxes, iou_threshold, threshold, box_format="corners"):
     
+    #ASSERT BBOXES --> LIST
     assert type(bboxes) == list
 
+    #BOX[1] --> CONFIDENCE SCORE
     bboxes = [box for box in bboxes if box[1] > threshold]
-    bboxes = sorted(bboxes, key=lambda x:x[1], reverse=True)
+    bboxes = sorted(bboxes, key = lambda x: x[1], reverse=True)
     bboxes_after_nms = []
 
+    #KEEP POPPING A BOX AND COMPARE AGAINST OTHERS
     while bboxes:
         chosen_box = bboxes.pop[0]
 
@@ -165,7 +169,7 @@ def plot_image(image, boxes):
 
     plt.show()
 
-def get_bboxes(loader, model, iou_threshold, threshold, pred_format="cells", box_format="midpoint", device="cuda",):
+def get_boxes(loader, model, iou_threshold, threshold, pred_format="cells", box_format="midpoint", device="cuda",):
 
     all_pred_boxes = []
     all_true_boxes = []

@@ -15,7 +15,7 @@ def create_csv(t_l_p, v_l_p):
     #TRAIN
     lst_file = os.listdir(t_l_p)
     my_dict = {}
-    lst_images = [val[:-3]+'jgp' for val in lst_file]
+    lst_images = [val[:-3]+'jpg' for val in lst_file]
 
     my_dict['image'] = lst_images
     my_dict['label'] = lst_file
@@ -23,7 +23,7 @@ def create_csv(t_l_p, v_l_p):
     #TEST
     v_lst_file = os.listdir(v_l_p)
     v_my_dict = {}
-    v_lst_images = [val[:-3]+'jgp' for val in v_lst_file]
+    v_lst_images = [val[:-3]+'jpg' for val in v_lst_file]
 
     v_my_dict['image'] = v_lst_images
     v_my_dict['label'] = v_lst_file
@@ -47,6 +47,6 @@ if __name__ == "__main__":
     v_data_path = "./data/ValImageFolder/images"
     v_label_path = "./data/val_labels_persons"
 
-    my_df, v_my_df = create_csv(t_data_path, v_data_path)
+    my_df, v_my_df = create_csv(t_label_path, v_label_path)
 
     print("CONVERSION COMPLETED ...")

@@ -10,7 +10,7 @@ from model import Yolov1
 from loss import YoloLoss
 from dataset import VOCDataset
 
-from utils import (non_max_suppression, mean_average_precision, intersection_over_union, cellboxes_to_boxes, get_bboxes, plot_image, save_checkpoint, load_checkpoint)
+from utils import (non_max_suppression, mean_average_precision, intersection_over_union, cellboxes_to_boxes, get_boxes, plot_image, save_checkpoint, load_checkpoint)
 
 seed = 123
 torch.manual_seed(seed)
@@ -25,11 +25,11 @@ PIN_MEMORY = True
 LOAD_MODEL = False
 LOAD_MODEL_FILE = "./model/overfit.pth.tar"
 
-IMG_DIR = "./data/TrainImageFolder/images"
-LABEL_DIR = "./data/train_labels_persons"
+IMG_DIR = "/home/wilfred/Desktop/object-detection/yolov1-al/data/TrainImageFolder/images"
+LABEL_DIR = "/home/wilfred/Desktop/object-detection/yolov1-al/data/train_labels_persons"
 
-IMG_DIR_TEST = "./data/ValImageFolder/images"
-LABEL_DIR_TEST = "./data/val_labels_persons"
+IMG_DIR_TEST = "/home/wilfred/Desktop/object-detection/yolov1-al/data/ValImageFolder/images"
+LABEL_DIR_TEST = "/home/wilfred/Desktop/object-detection/yolov1-al/data/val_labels_persons"
 
 class Compose(object):
     def __init__(self, transforms):
@@ -78,16 +78,19 @@ def main():
     train_loader = DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
     test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
     
-    '''
+    
     for epoch in range(EPOCHS):
 
         pred_boxes, target_boxes = get_boxes(train_loader, model, iou_threshold=0.5, threshold=0.4)
         mean_avg_prec = mean_average_precision(pred_boxes, target_boxes, iou_threshold=0.5, box_format="midpoint")
 
         print(f"Train mAP: {mean_avg_prec}")
-
+        break
+    '''
         train_fn(train_loader, model, optimizer, loss_fn)
     '''
+    
     print("Successful ...")
+
 if __name__ == "__main__":
     main()
