@@ -169,7 +169,7 @@ def plot_image(image, boxes):
 
     plt.show()
 
-def get_boxes(loader, model, iou_threshold, threshold, pred_format="cells", box_format="midpoint", device="cuda",):
+def get_boxes(loader, model, iou_threshold, threshold, pred_format="cells", box_format="midpoint", device="cpu",):
 
     all_pred_boxes = []
     all_true_boxes = []
