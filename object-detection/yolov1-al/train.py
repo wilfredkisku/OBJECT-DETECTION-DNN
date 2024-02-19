@@ -8,6 +8,9 @@ import torchvision.transforms.functional as FT
 
 from model import Yolov1
 from loss import YoloLoss
+from dataset import VOCDataset
+
+from utils import (non_max_suppression, mean_average_precision, intersection_over_union, cellboxes_to_boxes, get_bboxes, plot_image, save_checkpoint, load_checkpoint)
 
 seed = 123
 torch.manual_seed(seed)
@@ -21,8 +24,12 @@ NUM_WORKERS = 2
 PIN_MEMORY = True
 LOAD_MODEL = False
 LOAD_MODEL_FILE = "overfit.pth.tar"
-IMG_DIR = "data/images"
-LABEL_DIR = "data/labels"
+
+IMG_DIR = "data/TrainImageFolder/images"
+LABEL_DIR = "data/train_labels_persons"
+
+IMG_DIR_TEST = "data/ValImageFolder/images"
+LABEL_DIR_TEST = "data/val_labels_persons"
 
 class Compose(object):
     def __init__(self, transforms):
@@ -56,20 +63,22 @@ def train_fn(train_loader, model, optimizer, loss_fn):
 
 def main():
 
-    model = Yolov1(split_size=7, num_boxes=2, num_classes=1).to(DEVICE)
+    model = Yolov1(split_size=7, num_boxes=2, num_classes=1)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
 
     loss_fn = YoloLoss()
     
     if LOAD_MODEL:
         load_checkpoint(torch.load(LOAD_MODEL_FILE), model, optimizer)
-
-    train_dataset = VOCDataset("data/100examples.csv", transform=transform, img_dir=ING_DIR, label_dir=LABEL_DIR)
-    test_dataset = VOCDataset("data/test.csv", transform=transform, img_dir=IMG_DIR, label_dir = LABEL_DIR)
-
+    
+    
+    train_dataset = VOCDataset("data/mycsvfile_train.csv", transform=transform, img_dir=IMG_DIR, label_dir=LABEL_DIR)
+    test_dataset = VOCDataset("data/mycsvfile_test.csv", transform=transform, img_dir=IMG_DIR_TEST, label_dir = LABEL_DIR_TEST)
+    
     train_loader = DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
     test_loader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, pin_memory=PIN_MEMORY, shuffle=True, drop_last=True)
-
+    
+    '''
     for epoch in range(EPOCHS):
 
         pred_boxes, target_boxes = get_boxes(train_loader, model, iou_threshold=0.5, threshold=0.4)
@@ -78,6 +87,7 @@ def main():
         print(f"Train mAP: {mean_avg_prec}")
 
         train_fn(train_loader, model, optimizer, loss_fn)
-
+    '''
+    print("Successful ...")
 if __name__ == "__main__":
     main()

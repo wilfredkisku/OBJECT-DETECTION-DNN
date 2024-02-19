@@ -39,7 +39,7 @@ def intersection_over_union(boxes_preds, boxes_labels, box_format="midpoint"):
 
     return intersection / (box1_area + box2_area - intersection + 1e-6)
 
-def non_max_supression(bboxes, iou_threshold, threshold, box_format="corners"):
+def non_max_suppression(bboxes, iou_threshold, threshold, box_format="corners"):
     
     assert type(bboxes) == list
 
