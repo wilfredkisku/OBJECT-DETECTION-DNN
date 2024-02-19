@@ -1,4 +1,4 @@
-#import config
+import config as config
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
@@ -416,6 +416,7 @@ def get_loaders(train_csv_path, test_csv_path):
         drop_last=False,
     )
 
+    '''
     train_eval_dataset = YOLODataset(
         train_csv_path,
         transform=config.test_transforms,
@@ -432,8 +433,10 @@ def get_loaders(train_csv_path, test_csv_path):
         shuffle=False,
         drop_last=False,
     )
-
-    return train_loader, test_loader, train_eval_loader
+    '''
+    
+    return train_loader, test_loader
+    #return train_loader, test_loader, train_eval_loader
 
 def plot_couple_examples(model, loader, thresh, iou_thresh, anchors):
     model.eval()

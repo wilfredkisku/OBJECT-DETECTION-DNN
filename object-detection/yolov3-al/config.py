@@ -6,7 +6,6 @@ from albumentations.pytorch import ToTensorV2
 from utils import seed_everything
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-DATASET = "PASCAL_VOC"
 NUM_WORKERS = 2
 BATCH_SIZE = 16
 IMAGE_SIZE = 416
@@ -21,9 +20,14 @@ S = [IMAGE_SIZE // 32, IMAGE_SIZE // 16, IMAGE_SIZE // 8]
 PIN_MEMORY = True
 LOAD_MODEL = True
 SAVE_MODEL = True
-CHECKPOINT_FILE = "checkpoint.pth.tar"
-IMG_DIR = DATASET + "./data/images/"
-LABEL_DIR = DATASET + "./data/labels/"
+CHECKPOINT_FILE = "./model/checkpoint.pth.tar"
+
+IMG_DIR = "./data/TrainImageFolder/images"
+LABEL_DIR = "./data/train_labels_persons"
+
+IMG_DIR_TEST = "./data/ValImageFolder/images"
+LABEL_DIR_TEST = "./data/val_labels_persons"
+
 
 ANCHORS = [
     [(0.28, 0.22), (0.38, 0.48), (0.9, 0.78)],
