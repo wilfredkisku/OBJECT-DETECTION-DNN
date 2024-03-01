@@ -27,9 +27,12 @@ class YoloLoss():
         self.cls_loss_func = nn.CrossEntropyLoss(reduction='none', label_smoothing=label_smoothing)
         #set grid 4 X 4 --> when input dims in 128
         grid_x, grid_y = set_grid(grid_size=self.grid_size)
+        #print(grid_x)
+        #print(grid_y)
         self.grid_x = grid_x.contiguous().view((1, -1))
         self.grid_y = grid_y.contiguous().view((1, -1))
-
+        
+        #print(self.grid_x)
 
     def __call__(self, predictions, labels):
         #every prediction attached to a device
@@ -93,6 +96,8 @@ class YoloLoss():
     
 
     def calculate_iou(self, pred_box_cxcywh, target_box_cxcywh):
+        #print()
+        #print(pred_box_cxcywh.shape)
         pred_box_x1y1x2y2 = self.transform_cxcywh_to_x1y1x2y2(pred_box_cxcywh)
         target_box_x1y1x2y2 = self.transform_cxcywh_to_x1y1x2y2(target_box_cxcywh)
 
@@ -107,6 +112,9 @@ class YoloLoss():
         return inter
     
     def transform_cxcywh_to_x1y1x2y2(self, boxes):
+        #print(boxes[..., 0].shape) #incorrect
+        #print(self.grid_x.shape) #correct 
+        #print(self.grid_size) #correct
         xc = (boxes[..., 0] + self.grid_x.to(self.device)) / self.grid_size
         yc = (boxes[..., 1] + self.grid_y.to(self.device)) / self.grid_size
         x1 = xc - boxes[..., 2] / 2

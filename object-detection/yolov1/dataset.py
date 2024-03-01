@@ -1,5 +1,5 @@
 import os
-os.environ['MPLCONFIGDIR'] = '/workspace/storage/object-detection/yolov1/tmp/'
+#os.environ['MPLCONFIGDIR'] = '/home/wilfred/Dataset/dgx/object-detection/yolov1/tmp/'
 import sys
 import json
 from pathlib import Path
@@ -17,8 +17,9 @@ from utils import transform_xcycwh_to_x1y1wh
 ### image --> rescaled --> (128, 128)
 
 class Dataset:
+    #INIT CONFIGURATION
     def __init__(self, yaml_path, phase="train"):
-        # phase decides the dataset generation
+        
         with open(yaml_path, mode="r") as f:
             data_item = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -38,9 +39,11 @@ class Dataset:
         if phase == "val":
             self.generate_mAP_source(save_dir=Path("./data/eval_src"), mAP_filename=data_item["VAL_FILE"])
 
+    #LENGTH
     def __len__(self):
         return len(self.image_paths)
 
+    #GETITEM
     def __getitem__(self, index):
         filename, image, label = self.get_GT_item(index)
         shape = image.shape[:2]
@@ -62,6 +65,7 @@ class Dataset:
     def get_image(self, index):
         filename = self.image_paths[index].split(os.sep)[-1]
         image = cv2.imread(self.image_paths[index])
+        #BGR TO RGB CONVERSION
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return filename, image
 
@@ -181,6 +185,6 @@ if __name__ == "__main__":
 
     print(len(train_dataset), len(val_dataset))
 
-    #for data in train_dataset:
-    #    print(data)
-    #    break
+    for data in train_dataset:
+        print(data[1].shape)
+        break

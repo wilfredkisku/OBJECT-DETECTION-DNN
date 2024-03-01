@@ -5,38 +5,43 @@ from tqdm import tqdm
 #from dataset import Dataset
 from torchvision import datasets, transforms
 
-MEAN = 0.4333, 0.4333, 0.4333
-STD = 0.2194, 0.2194, 0.2194
+#MEAN = 0.4333, 0.4333, 0.4333
+#STD = 0.2194, 0.2194, 0.2194
+#MEAN = 0.4333
+#STD = 0.2194
+
+MEAN = np.array([0.485, 0.456, 0.406]) # RGB
+STD = np.array([0.229, 0.224, 0.225]) # RGB
 
 ################# calculate the mean and std ######################
 
-transform_ms = transforms.Compose([transforms.Resize((128, 128)),
-                                transforms.Grayscale(),
-                                transforms.ToTensor(),])
+#transform_ms = transforms.Compose([transforms.Resize((128, 128)),
+#                                transforms.Grayscale(),
+#                                transforms.ToTensor(),])
 
-def mean_and_std(path):
+#def mean_and_std(path):
 
-    dataset = datasets.ImageFolder(path, transform=transform_ms)
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
+#    dataset = datasets.ImageFolder(path, transform=transform_ms)
+#    dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-    nimages = 0
-    mean = 0.
-    std = 0.
+#    nimages = 0
+#    mean = 0.
+#    std = 0.
 
-    for batch, _ in tqdm(dataloader, desc="Progress"):
-        # Rearrange batch to be the shape of [B, C, W * H]
-        batch = batch.view(batch.size(0), batch.size(1), -1)
-        # Update total number of images
-        nimages += batch.size(0)
-        # Compute mean and std here
-        mean += batch.mean(2).sum(0) 
-        std += batch.std(2).sum(0)
+#    for batch, _ in tqdm(dataloader, desc="Progress"):
+#        # Rearrange batch to be the shape of [B, C, W * H]
+#        batch = batch.view(batch.size(0), batch.size(1), -1)
+#        # Update total number of images
+#        nimages += batch.size(0)
+#        # Compute mean and std here
+#        mean += batch.mean(2).sum(0) 
+#        std += batch.std(2).sum(0)
         
-    # Final step
-    mean /= nimages
-    std /= nimages
+#    # Final step
+#    mean /= nimages
+#    std /= nimages
 
-    print(mean, std)
+#    print(mean, std)
 
 ###################################################################
 
@@ -46,19 +51,19 @@ def to_tensor(image):
 
 def to_image(tensor, mean=MEAN, std=STD):
     denorm_tensor = tensor.clone()
-    for t, m, s in zip(denorm_tensor, mean, std):
-        t.mul_(s).add_(m)
-    denorm_tensor.clamp_(min=0, max=1.)
+    #for t, m, s in zip(denorm_tensor, mean, std):
+    #    t.mul_(s).add_(m)
+    #denorm_tensor.clamp_(min=0, max=1.)
     denorm_tensor *= 255
     #move the channel to the last --> CV2 representation
     image = denorm_tensor.permute(1,2,0).numpy().astype(np.uint8)
     return image
 
-def denormalize(image, mean=MEAN, std=STD):
-    image *= std
-    image += mean
-    image *= 255.
-    return image.astype(np.uint8)
+#def denormalize(image, mean=MEAN, std=STD):
+#    image *= std[:, None, None]
+#    image += mean[:, None, None]
+#    image *= 255.
+#    return cv2.cvtColor(image.permute(1,2,0).numpy().astype(np.uint8), cv2.COLOR_RGB2BGR)
 
 #### Transform Classes
 class Compose:
@@ -78,8 +83,8 @@ class Normalize:
 
     def __call__(self, image, boxes=None, labels=None):
         image /= 255.
-        #image -= self.mean
-        #image /= self.std
+        #image -= self.mean[:, None, None]
+        #image /= self.std[:, None, None]
         return image, boxes, labels
 
 class Resize:
@@ -88,6 +93,8 @@ class Resize:
 
     def __call__(self, image, boxes=None, labels=None):
         image = cv2.resize(image, (self.size, self.size))
+        ##to be used only for rgb
+        image = np.reshape(image, (-1, image.shape[0], image.shape[1]))
         return image, boxes, labels
 
 class GrayScale:
@@ -196,9 +203,10 @@ class BasicTransform:
         std = np.array(std, dtype=np.float32)
 
         self.tfs = Compose([Resize(),
-                            GrayScale(),
+                            #GrayScale(),
                             Normalize(mean=mean, std=std),
-                            ConcatenateChannels()])
+                            #ConcatenateChannels()
+                            ])
 
     def __call__(self, image, boxes=None, labels=None):
         image = image.astype(np.float32)
@@ -211,10 +219,10 @@ class AugmentTransform:
         std = np.array(std, dtype=np.float32)
         self.tfs = Compose([
             Resize(),
-            GrayScale(),
+            #GrayScale(),
             #### Photometric Augment ####
-            RandomBrightness(),
-            RandomContrast(),
+            #RandomBrightness(),
+            #RandomContrast(),
             ##### Geometric Augment #####
             #ToXminYminXmaxYmax(),
             #ToAbsoluteCoords(),
@@ -226,7 +234,7 @@ class AugmentTransform:
             #############################
             #LetterBox(new_shape=input_size),
             Normalize(mean=mean, std=std),
-            ConcatenateChannels()
+            #ConcatenateChannels()
         ])
 
     def __call__(self, image, boxes=None, labels=None):

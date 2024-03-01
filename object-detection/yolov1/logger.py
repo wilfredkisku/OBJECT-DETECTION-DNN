@@ -6,11 +6,11 @@ def build_basic_logger(log_file_path: str, set_level=2):
     output_file_log_handler.setFormatter(formatter)
 
     logger_levels = [
-        logging.DEBUG, # set_level = 0
-        logging.INFO, # set_level = 1
-        logging.WARNING, # set_level = 2
-        logging.ERROR, # set_level = 3
-        logging.CRITICAL # set_level = 4
+        logging.DEBUG,      # set_level = 0
+        logging.INFO,       # set_level = 1
+        logging.WARNING,    # set_level = 2
+        logging.ERROR,      # set_level = 3
+        logging.CRITICAL    # set_level = 4
     ]
 
     logger = logging.getLogger()

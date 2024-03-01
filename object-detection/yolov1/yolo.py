@@ -73,6 +73,8 @@ class YoloModel(nn.Module):
         self.grid_size = input_size // self.stride
         self.num_classes = num_classes
         
+        #print(self.grid_size)
+
         feat_dims = 512
         self.backbone = ResNet(BasicBlock, [2, 2, 2, 2])
         self.neck = ConvBlock(in_channels=feat_dims, out_channels=512)
@@ -85,7 +87,7 @@ class YoloModel(nn.Module):
         print("loading weights...")
         
         if pretrained:
-            ckpt = torch.load("/workspace/storage/object-detection/yolov1/yolov1_pretrained/yolov1-resnet18.pt", map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+            ckpt = torch.load("/home/wilfred/Desktop/object-detection/yolov1/yolov1_pretrained/yolov1-resnet18.pt", map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
             self.load_state_dict(ckpt["model_state"], strict=False)
 
     def forward(self, x):
@@ -118,12 +120,12 @@ class YoloModel(nn.Module):
         return torch.stack((xc, yc, w, h), dim=-1)
 
 if __name__ == "__main__":
-    input_size=128
+    input_size=448
     device = torch.device('cpu')
-    model = YoloModel(input_size=128, num_classes=1, pretrained=True).to(device)
+    model = YoloModel(input_size=input_size, num_classes=1, pretrained=True).to(device)
     inp = torch.randn(2, 3, input_size, input_size)
     model.eval()
     out = model(inp.to(device))
     print(out.device)
     print(out.shape)
-    #print(model)
+    print(model)

@@ -1,0 +1,12 @@
+2024-01-12 07:05:55 | [Train-Epoch:001] multipart: 1.8617  obj: 0.2894  noobj: 0.4491  box: 0.2696  cls: 0.0000  
+2024-01-12 07:07:16 | [Train-Epoch:001] multipart: 1.8645  obj: 0.2898  noobj: 0.4480  box: 0.2701  cls: 0.0000  
+2024-01-12 07:13:27 | [Train-Epoch:001] multipart: 1.8557  obj: 0.2877  noobj: 0.4485  box: 0.2688  cls: 0.0000  
+2024-01-12 07:15:00 | [Train-Epoch:001] multipart: 1.8526  obj: 0.2870  noobj: 0.4488  box: 0.2683  cls: 0.0000  
+2024-01-12 07:17:57 | [Train-Epoch:001] multipart: 1.6262  obj: 0.2658  noobj: 0.3072  box: 0.2413  cls: 0.0000  
+2024-01-12 07:18:53 | [Train-Epoch:001] multipart: 1.6281  obj: 0.2661  noobj: 0.3069  box: 0.2417  cls: 0.0000  
+2024-01-12 08:13:35 | [Train-Epoch:001] multipart: 1.6287  obj: 0.2672  noobj: 0.3074  box: 0.2416  cls: 0.0000  
+2024-01-12 08:14:35 | [Train-Epoch:001] multipart: 1.6251  obj: 0.2673  noobj: 0.3068  box: 0.2409  cls: 0.0000  
+2024-01-12 10:39:42 | [Train-Epoch:001] multipart: 1.6279  obj: 0.2672  noobj: 0.3075  box: 0.2414  cls: 0.0000  
+2024-01-12 10:40:36 | [Train-Epoch:001] multipart: 1.6276  obj: 0.2671  noobj: 0.3078  box: 0.2413  cls: 0.0000  
+2024-01-12 11:43:26 | [Train-Epoch:001] multipart: 1.6187  obj: 0.1322  noobj: 0.1664  box: 0.2807  cls: 0.0000  
+2024-01-12 11:44:34 | [Train-Epoch:001] multipart: 1.6190  obj: 0.1324  noobj: 0.1683  box: 0.2805  cls: 0.0000  

@@ -1,0 +1,541 @@
+2024-01-16 06:46:43 | [Train-Epoch:001] multipart: 1.9043  obj: 0.4584  noobj: 0.4343  box: 0.2457  cls: 0.0000  
+2024-01-16 06:51:22 | [Train-Epoch:001] multipart: 1.8991  obj: 0.4599  noobj: 0.4340  box: 0.2444  cls: 0.0000  
+2024-01-16 06:55:38 | [Train-Epoch:002] multipart: 1.3972  obj: 0.4170  noobj: 0.3421  box: 0.1618  cls: 0.0000  
+2024-01-16 06:59:51 | [Train-Epoch:003] multipart: 1.0823  obj: 0.3799  noobj: 0.3303  box: 0.1074  cls: 0.0000  
+2024-01-16 07:04:23 | [Train-Epoch:004] multipart: 0.8551  obj: 0.3340  noobj: 0.2874  box: 0.0755  cls: 0.0000  
+2024-01-16 08:21:20 | [Train-Epoch:001] multipart: 1.8990  obj: 0.4584  noobj: 0.4322  box: 0.2449  cls: 0.0000  
+2024-01-16 08:49:54 | [Train-Epoch:002] multipart: 1.4009  obj: 0.4148  noobj: 0.3445  box: 0.1628  cls: 0.0000  
+2024-01-16 09:09:39 | [Train-Epoch:003] multipart: 1.0842  obj: 0.3764  noobj: 0.3317  box: 0.1084  cls: 0.0000  
+2024-01-16 09:25:43 | [Train-Epoch:004] multipart: 0.8569  obj: 0.3334  noobj: 0.2902  box: 0.0757  cls: 0.0000  
+2024-01-16 09:42:32 | [Train-Epoch:005] multipart: 0.6942  obj: 0.2795  noobj: 0.2295  box: 0.0600  cls: 0.0000  
+2024-01-16 10:03:36 | [Train-Epoch:006] multipart: 0.5514  obj: 0.2272  noobj: 0.1647  box: 0.0484  cls: 0.0000  
+2024-01-16 10:19:58 | [Train-Epoch:007] multipart: 0.4653  obj: 0.1932  noobj: 0.1225  box: 0.0422  cls: 0.0000  
+2024-01-16 10:36:28 | [Train-Epoch:008] multipart: 0.3899  obj: 0.1635  noobj: 0.0834  box: 0.0370  cls: 0.0000  
+2024-01-16 10:55:37 | [Train-Epoch:009] multipart: 0.3355  obj: 0.1434  noobj: 0.0622  box: 0.0322  cls: 0.0000  
+2024-01-16 11:11:28 | [Train-Epoch:010] multipart: 0.2862  obj: 0.1248  noobj: 0.0448  box: 0.0278  cls: 0.0000  
+2024-01-16 11:19:50 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.065
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.195
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.029
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.171
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.463
+
+2024-01-16 11:35:51 | [Train-Epoch:011] multipart: 0.2484  obj: 0.1120  noobj: 0.0329  box: 0.0240  cls: 0.0000  
+2024-01-16 11:51:50 | [Train-Epoch:012] multipart: 0.2163  obj: 0.1018  noobj: 0.0236  box: 0.0206  cls: 0.0000  
+2024-01-16 12:07:19 | [Train-Epoch:013] multipart: 0.1951  obj: 0.0936  noobj: 0.0193  box: 0.0184  cls: 0.0000  
+2024-01-16 12:23:49 | [Train-Epoch:014] multipart: 0.1780  obj: 0.0877  noobj: 0.0157  box: 0.0165  cls: 0.0000  
+2024-01-16 12:39:44 | [Train-Epoch:015] multipart: 0.1630  obj: 0.0821  noobj: 0.0126  box: 0.0149  cls: 0.0000  
+2024-01-16 12:54:31 | [Train-Epoch:016] multipart: 0.1497  obj: 0.0777  noobj: 0.0103  box: 0.0134  cls: 0.0000  
+2024-01-16 13:09:41 | [Train-Epoch:017] multipart: 0.1404  obj: 0.0742  noobj: 0.0097  box: 0.0123  cls: 0.0000  
+2024-01-16 13:26:12 | [Train-Epoch:018] multipart: 0.1301  obj: 0.0699  noobj: 0.0076  box: 0.0113  cls: 0.0000  
+2024-01-16 13:45:04 | [Train-Epoch:019] multipart: 0.1215  obj: 0.0653  noobj: 0.0063  box: 0.0106  cls: 0.0000  
+2024-01-16 14:01:48 | [Train-Epoch:020] multipart: 0.1145  obj: 0.0631  noobj: 0.0058  box: 0.0097  cls: 0.0000  
+2024-01-16 14:08:54 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.064
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.192
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.028
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.007
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.038
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.168
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.458
+
+2024-01-16 14:26:08 | [Train-Epoch:021] multipart: 0.1075  obj: 0.0603  noobj: 0.0046  box: 0.0090  cls: 0.0000  
+2024-01-16 14:41:59 | [Train-Epoch:022] multipart: 0.1042  obj: 0.0594  noobj: 0.0040  box: 0.0086  cls: 0.0000  
+2024-01-16 15:04:07 | [Train-Epoch:023] multipart: 0.0992  obj: 0.0574  noobj: 0.0039  box: 0.0080  cls: 0.0000  
+2024-01-16 15:36:29 | [Train-Epoch:024] multipart: 0.0954  obj: 0.0553  noobj: 0.0036  box: 0.0077  cls: 0.0000  
+2024-01-16 16:09:03 | [Train-Epoch:025] multipart: 0.0921  obj: 0.0542  noobj: 0.0035  box: 0.0072  cls: 0.0000  
+2024-01-16 16:32:35 | [Train-Epoch:026] multipart: 0.0891  obj: 0.0534  noobj: 0.0031  box: 0.0068  cls: 0.0000  
+2024-01-16 16:38:33 | [Train-Epoch:027] multipart: 0.0857  obj: 0.0507  noobj: 0.0029  box: 0.0067  cls: 0.0000  
+2024-01-16 16:44:16 | [Train-Epoch:028] multipart: 0.0823  obj: 0.0490  noobj: 0.0026  box: 0.0064  cls: 0.0000  
+2024-01-16 16:49:59 | [Train-Epoch:029] multipart: 0.0798  obj: 0.0475  noobj: 0.0028  box: 0.0062  cls: 0.0000  
+2024-01-16 16:55:56 | [Train-Epoch:030] multipart: 0.0777  obj: 0.0466  noobj: 0.0027  box: 0.0060  cls: 0.0000  
+2024-01-16 16:58:04 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.062
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.188
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.027
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.162
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.449
+
+2024-01-16 17:08:11 | [Train-Epoch:031] multipart: 0.0745  obj: 0.0453  noobj: 0.0021  box: 0.0056  cls: 0.0000  
+2024-01-16 17:14:11 | [Train-Epoch:032] multipart: 0.0727  obj: 0.0441  noobj: 0.0019  box: 0.0055  cls: 0.0000  
+2024-01-16 17:20:08 | [Train-Epoch:033] multipart: 0.0711  obj: 0.0438  noobj: 0.0018  box: 0.0053  cls: 0.0000  
+2024-01-16 17:25:47 | [Train-Epoch:034] multipart: 0.0696  obj: 0.0431  noobj: 0.0019  box: 0.0051  cls: 0.0000  
+2024-01-16 17:31:31 | [Train-Epoch:035] multipart: 0.0675  obj: 0.0417  noobj: 0.0019  box: 0.0050  cls: 0.0000  
+2024-01-16 17:37:31 | [Train-Epoch:036] multipart: 0.0658  obj: 0.0407  noobj: 0.0018  box: 0.0048  cls: 0.0000  
+2024-01-16 17:43:11 | [Train-Epoch:037] multipart: 0.0638  obj: 0.0395  noobj: 0.0017  box: 0.0047  cls: 0.0000  
+2024-01-16 17:48:47 | [Train-Epoch:038] multipart: 0.0625  obj: 0.0390  noobj: 0.0015  box: 0.0046  cls: 0.0000  
+2024-01-16 17:54:49 | [Train-Epoch:039] multipart: 0.0606  obj: 0.0376  noobj: 0.0015  box: 0.0044  cls: 0.0000  
+2024-01-16 18:00:33 | [Train-Epoch:040] multipart: 0.0597  obj: 0.0376  noobj: 0.0014  box: 0.0043  cls: 0.0000  
+2024-01-16 18:02:49 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.062
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.189
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.026
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.010
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.050
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.161
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.442
+
+2024-01-16 18:08:27 | [Train-Epoch:041] multipart: 0.0587  obj: 0.0366  noobj: 0.0015  box: 0.0043  cls: 0.0000  
+2024-01-16 18:14:36 | [Train-Epoch:042] multipart: 0.0588  obj: 0.0365  noobj: 0.0015  box: 0.0043  cls: 0.0000  
+2024-01-16 18:20:27 | [Train-Epoch:043] multipart: 0.0566  obj: 0.0351  noobj: 0.0014  box: 0.0041  cls: 0.0000  
+2024-01-16 18:26:13 | [Train-Epoch:044] multipart: 0.0546  obj: 0.0344  noobj: 0.0012  box: 0.0039  cls: 0.0000  
+2024-01-16 18:32:01 | [Train-Epoch:045] multipart: 0.0543  obj: 0.0340  noobj: 0.0013  box: 0.0039  cls: 0.0000  
+2024-01-16 18:37:55 | [Train-Epoch:046] multipart: 0.0530  obj: 0.0333  noobj: 0.0011  box: 0.0038  cls: 0.0000  
+2024-01-16 18:43:36 | [Train-Epoch:047] multipart: 0.0520  obj: 0.0328  noobj: 0.0011  box: 0.0037  cls: 0.0000  
+2024-01-16 18:49:39 | [Train-Epoch:048] multipart: 0.0507  obj: 0.0321  noobj: 0.0010  box: 0.0036  cls: 0.0000  
+2024-01-16 18:55:10 | [Train-Epoch:049] multipart: 0.0500  obj: 0.0317  noobj: 0.0010  box: 0.0036  cls: 0.0000  
+2024-01-16 19:00:49 | [Train-Epoch:050] multipart: 0.0491  obj: 0.0312  noobj: 0.0009  box: 0.0035  cls: 0.0000  
+2024-01-16 19:03:02 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.064
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.192
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.028
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.042
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.165
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.453
+
+2024-01-16 19:08:46 | [Train-Epoch:051] multipart: 0.0494  obj: 0.0314  noobj: 0.0013  box: 0.0035  cls: 0.0000  
+2024-01-16 19:14:34 | [Train-Epoch:052] multipart: 0.0482  obj: 0.0300  noobj: 0.0012  box: 0.0035  cls: 0.0000  
+2024-01-16 19:20:18 | [Train-Epoch:053] multipart: 0.0466  obj: 0.0292  noobj: 0.0010  box: 0.0034  cls: 0.0000  
+2024-01-16 19:25:56 | [Train-Epoch:054] multipart: 0.0457  obj: 0.0287  noobj: 0.0009  box: 0.0033  cls: 0.0000  
+2024-01-16 19:31:49 | [Train-Epoch:055] multipart: 0.0443  obj: 0.0279  noobj: 0.0009  box: 0.0032  cls: 0.0000  
+2024-01-16 19:37:43 | [Train-Epoch:056] multipart: 0.0439  obj: 0.0275  noobj: 0.0010  box: 0.0032  cls: 0.0000  
+2024-01-16 19:43:41 | [Train-Epoch:057] multipart: 0.0438  obj: 0.0273  noobj: 0.0010  box: 0.0032  cls: 0.0000  
+2024-01-16 19:49:27 | [Train-Epoch:058] multipart: 0.0428  obj: 0.0267  noobj: 0.0009  box: 0.0031  cls: 0.0000  
+2024-01-16 19:55:13 | [Train-Epoch:059] multipart: 0.0417  obj: 0.0259  noobj: 0.0009  box: 0.0031  cls: 0.0000  
+2024-01-16 20:00:50 | [Train-Epoch:060] multipart: 0.0409  obj: 0.0255  noobj: 0.0008  box: 0.0030  cls: 0.0000  
+2024-01-16 20:03:03 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.026
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.007
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.038
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.157
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.431
+
+2024-01-16 20:08:43 | [Train-Epoch:061] multipart: 0.0403  obj: 0.0251  noobj: 0.0009  box: 0.0030  cls: 0.0000  
+2024-01-16 20:14:19 | [Train-Epoch:062] multipart: 0.0395  obj: 0.0247  noobj: 0.0008  box: 0.0029  cls: 0.0000  
+2024-01-16 20:20:02 | [Train-Epoch:063] multipart: 0.0393  obj: 0.0247  noobj: 0.0007  box: 0.0028  cls: 0.0000  
+2024-01-16 20:25:49 | [Train-Epoch:064] multipart: 0.0388  obj: 0.0245  noobj: 0.0007  box: 0.0028  cls: 0.0000  
+2024-01-16 20:31:29 | [Train-Epoch:065] multipart: 0.0380  obj: 0.0236  noobj: 0.0007  box: 0.0028  cls: 0.0000  
+2024-01-16 20:37:13 | [Train-Epoch:066] multipart: 0.0378  obj: 0.0234  noobj: 0.0008  box: 0.0028  cls: 0.0000  
+2024-01-16 20:43:06 | [Train-Epoch:067] multipart: 0.0372  obj: 0.0232  noobj: 0.0008  box: 0.0027  cls: 0.0000  
+2024-01-16 20:48:51 | [Train-Epoch:068] multipart: 0.0369  obj: 0.0231  noobj: 0.0007  box: 0.0027  cls: 0.0000  
+2024-01-16 20:54:14 | [Train-Epoch:069] multipart: 0.0365  obj: 0.0227  noobj: 0.0008  box: 0.0027  cls: 0.0000  
+2024-01-16 20:59:51 | [Train-Epoch:070] multipart: 0.0354  obj: 0.0219  noobj: 0.0007  box: 0.0026  cls: 0.0000  
+2024-01-16 21:01:58 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.182
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.026
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.041
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.429
+
+2024-01-16 21:07:39 | [Train-Epoch:071] multipart: 0.0350  obj: 0.0218  noobj: 0.0006  box: 0.0026  cls: 0.0000  
+2024-01-16 21:13:11 | [Train-Epoch:072] multipart: 0.0345  obj: 0.0216  noobj: 0.0007  box: 0.0025  cls: 0.0000  
+2024-01-16 21:19:03 | [Train-Epoch:073] multipart: 0.0344  obj: 0.0213  noobj: 0.0007  box: 0.0025  cls: 0.0000  
+2024-01-16 21:24:20 | [Train-Epoch:074] multipart: 0.0340  obj: 0.0213  noobj: 0.0006  box: 0.0025  cls: 0.0000  
+2024-01-16 21:29:28 | [Train-Epoch:075] multipart: 0.0342  obj: 0.0214  noobj: 0.0006  box: 0.0025  cls: 0.0000  
+2024-01-16 21:34:32 | [Train-Epoch:076] multipart: 0.0334  obj: 0.0210  noobj: 0.0007  box: 0.0024  cls: 0.0000  
+2024-01-16 21:39:42 | [Train-Epoch:077] multipart: 0.0330  obj: 0.0207  noobj: 0.0006  box: 0.0024  cls: 0.0000  
+2024-01-16 21:44:52 | [Train-Epoch:078] multipart: 0.0324  obj: 0.0203  noobj: 0.0006  box: 0.0024  cls: 0.0000  
+2024-01-16 21:50:02 | [Train-Epoch:079] multipart: 0.0325  obj: 0.0202  noobj: 0.0007  box: 0.0024  cls: 0.0000  
+2024-01-16 21:55:24 | [Train-Epoch:080] multipart: 0.0328  obj: 0.0203  noobj: 0.0006  box: 0.0024  cls: 0.0000  
+2024-01-16 21:57:21 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.184
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.157
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.434
+
+2024-01-16 22:02:24 | [Train-Epoch:081] multipart: 0.0315  obj: 0.0196  noobj: 0.0006  box: 0.0023  cls: 0.0000  
+2024-01-16 22:07:29 | [Train-Epoch:082] multipart: 0.0314  obj: 0.0196  noobj: 0.0006  box: 0.0023  cls: 0.0000  
+2024-01-16 22:12:37 | [Train-Epoch:083] multipart: 0.0313  obj: 0.0196  noobj: 0.0006  box: 0.0023  cls: 0.0000  
+2024-01-16 22:17:38 | [Train-Epoch:084] multipart: 0.0308  obj: 0.0191  noobj: 0.0006  box: 0.0023  cls: 0.0000  
+2024-01-16 22:22:44 | [Train-Epoch:085] multipart: 0.0298  obj: 0.0186  noobj: 0.0006  box: 0.0022  cls: 0.0000  
+2024-01-16 22:27:45 | [Train-Epoch:086] multipart: 0.0299  obj: 0.0187  noobj: 0.0005  box: 0.0022  cls: 0.0000  
+2024-01-16 22:33:00 | [Train-Epoch:087] multipart: 0.0294  obj: 0.0182  noobj: 0.0006  box: 0.0022  cls: 0.0000  
+2024-01-16 22:38:14 | [Train-Epoch:088] multipart: 0.0291  obj: 0.0182  noobj: 0.0007  box: 0.0021  cls: 0.0000  
+2024-01-16 22:43:26 | [Train-Epoch:089] multipart: 0.0291  obj: 0.0182  noobj: 0.0005  box: 0.0021  cls: 0.0000  
+2024-01-16 22:48:29 | [Train-Epoch:090] multipart: 0.0289  obj: 0.0181  noobj: 0.0006  box: 0.0021  cls: 0.0000  
+2024-01-16 22:50:33 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.061
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.189
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.026
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.042
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.160
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.445
+
+2024-01-16 22:55:41 | [Train-Epoch:091] multipart: 0.0274  obj: 0.0175  noobj: 0.0006  box: 0.0019  cls: 0.0000  
+2024-01-16 23:00:49 | [Train-Epoch:092] multipart: 0.0262  obj: 0.0172  noobj: 0.0005  box: 0.0018  cls: 0.0000  
+2024-01-16 23:06:05 | [Train-Epoch:093] multipart: 0.0259  obj: 0.0174  noobj: 0.0005  box: 0.0017  cls: 0.0000  
+2024-01-16 23:11:04 | [Train-Epoch:094] multipart: 0.0257  obj: 0.0174  noobj: 0.0005  box: 0.0016  cls: 0.0000  
+2024-01-16 23:16:07 | [Train-Epoch:095] multipart: 0.0250  obj: 0.0173  noobj: 0.0004  box: 0.0015  cls: 0.0000  
+2024-01-16 23:21:15 | [Train-Epoch:096] multipart: 0.0248  obj: 0.0172  noobj: 0.0004  box: 0.0015  cls: 0.0000  
+2024-01-16 23:26:21 | [Train-Epoch:097] multipart: 0.0245  obj: 0.0172  noobj: 0.0004  box: 0.0014  cls: 0.0000  
+2024-01-16 23:31:30 | [Train-Epoch:098] multipart: 0.0242  obj: 0.0170  noobj: 0.0004  box: 0.0014  cls: 0.0000  
+2024-01-16 23:36:34 | [Train-Epoch:099] multipart: 0.0242  obj: 0.0172  noobj: 0.0004  box: 0.0014  cls: 0.0000  
+2024-01-16 23:41:54 | [Train-Epoch:100] multipart: 0.0241  obj: 0.0173  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-16 23:43:51 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.430
+
+2024-01-16 23:48:51 | [Train-Epoch:101] multipart: 0.0239  obj: 0.0171  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-16 23:53:56 | [Train-Epoch:102] multipart: 0.0240  obj: 0.0173  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-16 23:59:06 | [Train-Epoch:103] multipart: 0.0238  obj: 0.0172  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-17 00:04:31 | [Train-Epoch:104] multipart: 0.0235  obj: 0.0169  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-17 00:09:37 | [Train-Epoch:105] multipart: 0.0237  obj: 0.0171  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-17 00:14:52 | [Train-Epoch:106] multipart: 0.0235  obj: 0.0171  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:20:02 | [Train-Epoch:107] multipart: 0.0237  obj: 0.0171  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-17 00:25:07 | [Train-Epoch:108] multipart: 0.0235  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:30:23 | [Train-Epoch:109] multipart: 0.0235  obj: 0.0170  noobj: 0.0004  box: 0.0013  cls: 0.0000  
+2024-01-17 00:35:27 | [Train-Epoch:110] multipart: 0.0233  obj: 0.0169  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:37:32 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.185
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.045
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.435
+
+2024-01-17 00:42:46 | [Train-Epoch:111] multipart: 0.0235  obj: 0.0171  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:48:16 | [Train-Epoch:112] multipart: 0.0233  obj: 0.0169  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:53:29 | [Train-Epoch:113] multipart: 0.0233  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 00:58:30 | [Train-Epoch:114] multipart: 0.0233  obj: 0.0171  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:03:34 | [Train-Epoch:115] multipart: 0.0235  obj: 0.0173  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:08:39 | [Train-Epoch:116] multipart: 0.0232  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:13:43 | [Train-Epoch:117] multipart: 0.0230  obj: 0.0170  noobj: 0.0003  box: 0.0012  cls: 0.0000  
+2024-01-17 01:18:59 | [Train-Epoch:118] multipart: 0.0232  obj: 0.0171  noobj: 0.0003  box: 0.0012  cls: 0.0000  
+2024-01-17 01:24:25 | [Train-Epoch:119] multipart: 0.0230  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:29:34 | [Train-Epoch:120] multipart: 0.0231  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:31:30 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.432
+
+2024-01-17 01:36:33 | [Train-Epoch:121] multipart: 0.0231  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:41:40 | [Train-Epoch:122] multipart: 0.0233  obj: 0.0172  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:46:52 | [Train-Epoch:123] multipart: 0.0229  obj: 0.0169  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:51:58 | [Train-Epoch:124] multipart: 0.0227  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 01:57:19 | [Train-Epoch:125] multipart: 0.0228  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 02:05:52 | [Train-Epoch:126] multipart: 0.0229  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 02:29:52 | [Train-Epoch:127] multipart: 0.0230  obj: 0.0169  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 02:54:19 | [Train-Epoch:128] multipart: 0.0228  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 03:19:29 | [Train-Epoch:129] multipart: 0.0227  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 03:44:31 | [Train-Epoch:130] multipart: 0.0226  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 03:50:43 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.184
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.431
+
+2024-01-17 04:01:07 | [Train-Epoch:131] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:10:55 | [Train-Epoch:132] multipart: 0.0227  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:15:48 | [Train-Epoch:133] multipart: 0.0225  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:20:38 | [Train-Epoch:134] multipart: 0.0229  obj: 0.0169  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:25:46 | [Train-Epoch:135] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:30:57 | [Train-Epoch:136] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 04:36:16 | [Train-Epoch:137] multipart: 0.0222  obj: 0.0162  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:41:35 | [Train-Epoch:138] multipart: 0.0227  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 04:46:55 | [Train-Epoch:139] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 04:52:14 | [Train-Epoch:140] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 04:54:27 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.182
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.429
+
+2024-01-17 04:59:30 | [Train-Epoch:141] multipart: 0.0228  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:04:51 | [Train-Epoch:142] multipart: 0.0228  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:10:01 | [Train-Epoch:143] multipart: 0.0222  obj: 0.0163  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:15:24 | [Train-Epoch:144] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 05:20:34 | [Train-Epoch:145] multipart: 0.0230  obj: 0.0170  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:26:01 | [Train-Epoch:146] multipart: 0.0223  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 05:31:21 | [Train-Epoch:147] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:36:40 | [Train-Epoch:148] multipart: 0.0228  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:42:04 | [Train-Epoch:149] multipart: 0.0227  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:47:27 | [Train-Epoch:150] multipart: 0.0227  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 05:49:40 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.184
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.434
+
+2024-01-17 05:55:06 | [Train-Epoch:151] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 06:00:30 | [Train-Epoch:152] multipart: 0.0229  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 06:07:07 | [Train-Epoch:153] multipart: 0.0225  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 06:16:33 | [Train-Epoch:154] multipart: 0.0228  obj: 0.0168  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 06:26:30 | [Train-Epoch:155] multipart: 0.0228  obj: 0.0168  noobj: 0.0003  box: 0.0012  cls: 0.0000  
+2024-01-17 06:38:05 | [Train-Epoch:156] multipart: 0.0226  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 06:49:54 | [Train-Epoch:157] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 07:16:42 | [Train-Epoch:158] multipart: 0.0224  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 07:47:09 | [Train-Epoch:159] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 08:21:47 | [Train-Epoch:160] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 08:35:18 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.184
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.433
+
+2024-01-17 09:08:17 | [Train-Epoch:161] multipart: 0.0225  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 09:40:09 | [Train-Epoch:162] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 10:12:11 | [Train-Epoch:163] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 10:52:32 | [Train-Epoch:164] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 11:34:09 | [Train-Epoch:165] multipart: 0.0225  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 12:21:32 | [Train-Epoch:166] multipart: 0.0230  obj: 0.0171  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 13:05:53 | [Train-Epoch:167] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 13:50:37 | [Train-Epoch:168] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 14:18:04 | [Train-Epoch:169] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 14:44:18 | [Train-Epoch:170] multipart: 0.0226  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 14:54:21 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.430
+
+2024-01-17 15:19:13 | [Train-Epoch:171] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 15:44:15 | [Train-Epoch:172] multipart: 0.0225  obj: 0.0166  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-17 16:11:26 | [Train-Epoch:173] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 16:38:31 | [Train-Epoch:174] multipart: 0.0225  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 17:07:05 | [Train-Epoch:175] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 17:34:39 | [Train-Epoch:176] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 18:01:59 | [Train-Epoch:177] multipart: 0.0225  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 18:27:52 | [Train-Epoch:178] multipart: 0.0225  obj: 0.0167  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-17 18:55:18 | [Train-Epoch:179] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 19:26:03 | [Train-Epoch:180] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 19:37:02 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.184
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.154
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.430
+
+2024-01-17 20:05:38 | [Train-Epoch:181] multipart: 0.0224  obj: 0.0166  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-17 20:33:20 | [Train-Epoch:182] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 21:03:35 | [Train-Epoch:183] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 21:28:16 | [Train-Epoch:184] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 21:51:18 | [Train-Epoch:185] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 22:16:51 | [Train-Epoch:186] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 22:40:06 | [Train-Epoch:187] multipart: 0.0225  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 23:03:47 | [Train-Epoch:188] multipart: 0.0225  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-17 23:31:04 | [Train-Epoch:189] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-17 23:57:09 | [Train-Epoch:190] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 00:05:48 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.185
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.435
+
+2024-01-18 00:25:14 | [Train-Epoch:191] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 00:48:14 | [Train-Epoch:192] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 01:13:46 | [Train-Epoch:193] multipart: 0.0221  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 01:34:09 | [Train-Epoch:194] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 01:52:19 | [Train-Epoch:195] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:09:01 | [Train-Epoch:196] multipart: 0.0224  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:27:21 | [Train-Epoch:197] multipart: 0.0223  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:39:54 | [Train-Epoch:198] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:50:07 | [Train-Epoch:199] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:54:59 | [Train-Epoch:200] multipart: 0.0225  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 02:56:42 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.182
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.431
+
+2024-01-18 03:00:55 | [Train-Epoch:201] multipart: 0.0225  obj: 0.0166  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 03:05:20 | [Train-Epoch:202] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:09:35 | [Train-Epoch:203] multipart: 0.0221  obj: 0.0162  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:13:56 | [Train-Epoch:204] multipart: 0.0224  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:18:19 | [Train-Epoch:205] multipart: 0.0226  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:22:38 | [Train-Epoch:206] multipart: 0.0221  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:26:55 | [Train-Epoch:207] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:31:16 | [Train-Epoch:208] multipart: 0.0222  obj: 0.0163  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 03:35:34 | [Train-Epoch:209] multipart: 0.0220  obj: 0.0161  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:39:53 | [Train-Epoch:210] multipart: 0.0223  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:41:31 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.182
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.154
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.429
+
+2024-01-18 03:45:54 | [Train-Epoch:211] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:50:24 | [Train-Epoch:212] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:54:44 | [Train-Epoch:213] multipart: 0.0226  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 03:59:01 | [Train-Epoch:214] multipart: 0.0222  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:03:22 | [Train-Epoch:215] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:07:52 | [Train-Epoch:216] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:12:21 | [Train-Epoch:217] multipart: 0.0222  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:16:39 | [Train-Epoch:218] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:20:59 | [Train-Epoch:219] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:25:20 | [Train-Epoch:220] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:27:00 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.045
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.154
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.429
+
+2024-01-18 04:31:26 | [Train-Epoch:221] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:35:49 | [Train-Epoch:222] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:40:17 | [Train-Epoch:223] multipart: 0.0223  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:44:38 | [Train-Epoch:224] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:49:00 | [Train-Epoch:225] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:53:24 | [Train-Epoch:226] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 04:57:50 | [Train-Epoch:227] multipart: 0.0222  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:02:16 | [Train-Epoch:228] multipart: 0.0220  obj: 0.0161  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:06:40 | [Train-Epoch:229] multipart: 0.0221  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:10:59 | [Train-Epoch:230] multipart: 0.0221  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:12:37 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.183
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.045
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.429
+
+2024-01-18 05:16:56 | [Train-Epoch:231] multipart: 0.0221  obj: 0.0164  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 05:21:17 | [Train-Epoch:232] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:25:45 | [Train-Epoch:233] multipart: 0.0224  obj: 0.0166  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 05:30:32 | [Train-Epoch:234] multipart: 0.0220  obj: 0.0162  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:35:10 | [Train-Epoch:235] multipart: 0.0221  obj: 0.0163  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 05:39:47 | [Train-Epoch:236] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:44:21 | [Train-Epoch:237] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:49:17 | [Train-Epoch:238] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 05:57:25 | [Train-Epoch:239] multipart: 0.0224  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:05:43 | [Train-Epoch:240] multipart: 0.0223  obj: 0.0165  noobj: 0.0003  box: 0.0011  cls: 0.0000  
+2024-01-18 06:09:15 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.182
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.044
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.154
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.428
+
+2024-01-18 06:18:08 | [Train-Epoch:241] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:21:03 | [Train-Epoch:242] multipart: 0.0222  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:23:48 | [Train-Epoch:243] multipart: 0.0221  obj: 0.0163  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:26:35 | [Train-Epoch:244] multipart: 0.0225  obj: 0.0165  noobj: 0.0004  box: 0.0012  cls: 0.0000  
+2024-01-18 06:29:19 | [Train-Epoch:245] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:32:07 | [Train-Epoch:246] multipart: 0.0223  obj: 0.0166  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:34:55 | [Train-Epoch:247] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:37:44 | [Train-Epoch:248] multipart: 0.0220  obj: 0.0164  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:40:27 | [Train-Epoch:249] multipart: 0.0223  obj: 0.0165  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:43:10 | [Train-Epoch:250] multipart: 0.0225  obj: 0.0167  noobj: 0.0004  box: 0.0011  cls: 0.0000  
+2024-01-18 06:44:10 | 
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.059
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.185
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.025
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.009
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.045
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.155
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.433
+
+2024-01-18 06:44:10 | [Best mAP at 10]
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.065
+	 - Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.195
+	 - Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.029
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50      | area= small | maxDets=100 ] = 0.000
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.008
+	 - Average Precision (AP) @[ IoU=0.50      | area=medium | maxDets=100 ] = 0.043
+	 - Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.171
+	 - Average Precision (AP) @[ IoU=0.50      | area= large | maxDets=100 ] = 0.463
+

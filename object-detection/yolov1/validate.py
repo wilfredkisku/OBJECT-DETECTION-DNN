@@ -27,12 +27,15 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #MEAN = 0.4333
 #STD = 0.2194
 
+#MEAN = np.array([0.485, 0.456, 0.406]) # RGB
+#STD = np.array([0.229, 0.224, 0.225]) # RGB
+
 def to_tensor(image):
     image = np.ascontiguousarray(image.transpose(2, 0, 1))
     return torch.from_numpy(image).float()
 
 
-def to_image(tensor, mean=(0.4333, 0.4333, 0.4333), std=(0.2194, 0.2194, 0.2194)):
+def to_image(tensor, mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)):
     denorm_tensor = tensor.clone()
     for t, m, s in zip(denorm_tensor, mean, std):
         t.mul_(s).add_(m)
@@ -42,7 +45,7 @@ def to_image(tensor, mean=(0.4333, 0.4333, 0.4333), std=(0.2194, 0.2194, 0.2194)
     return image
 
 @torch.no_grad()
-def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator, epoch=0, save_result=False, conf_thres = 0.001, nms_thres = 0.6, img_log_dir="/workspace/storage/object-detection/yolov1/experiments/training-image"):
+def validate(class_list, color_list, mAP_filepath, dataloader, model, evaluator, epoch=0, save_result=False, conf_thres = 0.25, nms_thres = 0.6, img_log_dir="/workspace/storage/object-detection/yolov1/experiments/training-image"):
     
     model.eval()
     

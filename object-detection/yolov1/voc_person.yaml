@@ -1,4 +1,4 @@
-PATH: /home/wilfred/Desktop/object-detection/yolov1/data/
+PATH: /home/wilfred/Desktop/dgx/object-detection/yolov1/data/
 
 TRAIN: 
  - TrainImageFolder/images

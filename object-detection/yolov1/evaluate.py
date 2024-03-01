@@ -13,10 +13,12 @@ class Evaluator():
         self.maxDets = 100
         self.areaRng = [[0 ** 2, 1e5 ** 2], [0 ** 2, 32 ** 2], [32 ** 2, 96 ** 2], [96 ** 2, 1e5 ** 2]]
         self.areaRngLbl = ['all', 'small', 'medium', 'large']
+        #[0.5, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
         self.iouThrs = np.linspace(.5, 0.95, int(np.round((0.95 - .5) / .05)) + 1, endpoint=True)
         
         with open(annotation_file, "r") as f:
             val_anno = json.load(f)
+
         self.groundtruths = self.split_areaRng(data=val_anno["annotations"])
         self.areaToann = {}
         for areaLbl in self.areaRngLbl:
@@ -25,7 +27,7 @@ class Evaluator():
             clsToimgToann = self.build_clsToimgToann(clsToann=clsToann)
             self.areaToann[areaLbl] = clsToimgToann
 
-
+    #INSTANCE OF THE CLASS IS MADE CALLABLE
     def __call__(self, predictions):
         predictions = self.transform_prediction_eval_format(data=predictions)
         predictions = self.split_areaRng(data=predictions)
@@ -242,7 +244,7 @@ class Evaluator():
             ap = ap + np.sum((mrec[i] - mrec[i - 1]) * mpre[i])
         return ap, mpre[0:len(mpre) - 1], mrec[0:len(mpre) - 1]
 
-
+    #EVALUATION FORMAT
     def transform_prediction_eval_format(self, data):
         ann = []
         for i in range(data.shape[0]):
@@ -255,7 +257,7 @@ class Evaluator():
                 }]
         return ann
 
-
+    #INTERSECTION CHECK BETWEEN BOXES
     def is_intersect(self, boxA, boxB):
         if boxA[0] > boxB[2]:
             return False  # boxA is right of boxB
@@ -267,7 +269,7 @@ class Evaluator():
             return False  # boxA is above boxB
         return True
 
-
+    #GETTING INTERSECTION FOR IOU CALCULATION
     def get_intersection(self, boxA, boxB):
         xA = max(boxA[0], boxB[0])
         yA = max(boxA[1], boxB[1])
@@ -275,13 +277,13 @@ class Evaluator():
         yB = min(boxA[3], boxB[3])
         return (xB - xA + 1) * (yB - yA + 1)
 
-
+    #GET IOU
     def get_union(self, boxA, boxB):
         area_A = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
         area_B = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
         return area_A + area_B
 
-
+    #X1Y1WH TO X1Y1X2Y2
     def transform_x1y1wh_to_x1y1x2y2(self, box):
         x1 = round(box[0], 2)
         y1 = round(box[1], 2)
@@ -289,7 +291,7 @@ class Evaluator():
         y2 = round(box[1] + box[3], 2)
         return [x1, y1, x2, y2]
 
-
+    #EVALUATE IOU
     def get_IoU(self, boxA, boxB):
         # x1y1wh -> x1y1x2y2
         boxA = self.transform_x1y1wh_to_x1y1x2y2(boxA)
@@ -301,7 +303,7 @@ class Evaluator():
         iou = inter / (union - inter)
         return iou
 
-
+    #IMAGE ID TO ANNOTATION
     def build_clsToimgToann(self, clsToann):
         clsToimgToann = {}
         for cls_id in clsToann.keys():
@@ -311,7 +313,7 @@ class Evaluator():
             clsToimgToann[cls_id] = imgToann
         return clsToimgToann
 
-
+    #CLASS TO ANNOTATION
     def build_clsToann(self, groundtruths):
         clsToann = defaultdict(list)
         for anno in groundtruths:
@@ -320,7 +322,7 @@ class Evaluator():
             del clsToann[-1]
         return clsToann
 
-
+    #SPLIT INTO DIFFERENT AREA REGIONS
     def split_areaRng(self, data):
         res = defaultdict(list)
         for dt in data:
